@@ -18,8 +18,7 @@
  				console.log('Welcome!  Fetching your information.... ');
  				FB.api('/me', function(response) {
  					console.log('Good to see you, ' + response.name + '.');
- 					var path = 'http://localhost:9000/#/';
- 					$location.path($location.path()+ 'details');
+ 					$location.path($location.path()+ 'about');
  					$route.reload();
  				});
  			} else {
