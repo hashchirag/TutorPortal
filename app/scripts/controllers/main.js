@@ -10,8 +10,7 @@
 
  
  angular.module('angularPortalApp')
- .controller('MainCtrl', function ($scope) {
-
+ .controller('MainCtrl', function ($scope,$location,$route) {
 
  	$scope.doLogin = function(){
  		FB.login(function(response) {
@@ -19,7 +18,9 @@
  				console.log('Welcome!  Fetching your information.... ');
  				FB.api('/me', function(response) {
  					console.log('Good to see you, ' + response.name + '.');
-
+ 					var path = 'http://localhost:9000/#/';
+ 					$location.path($location.path()+ 'details');
+ 					$route.reload();
  				});
  			} else {
  				console.log('User cancelled login or did not fully authorize.');
@@ -106,7 +107,6 @@ $(document).ready(function() {
 
 });
 //Animation Ending
-
 
 
 });
