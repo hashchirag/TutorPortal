@@ -10,18 +10,39 @@
 
  
  angular.module('angularPortalApp')
- .controller('MainCtrl', function ($scope,$location,$route) {
+ .controller('MainCtrl', function ($scope,$location,$route,$http) {
+
+ 	$scope.sendData = function ($scope,access_token) {
+ 		console.log(access_token);
+ 		$http({
+ 			url: 'http://staging-now.hashlearn.com/api/users/tutorFacebookLogin/',
+ 			method: "POST",
+ 			data: $.param({ 'access_token' : access_token }),
+ 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+ 		})
+ 		.then(function(response) {
+            // success
+            alert('success');
+            $location.path($location.path()+ 'details');
+            $route.reload();
+        }, 
+    function(response) { // optional
+            // failed
+            alert('failed');
+        });
+ 	}
 
  	$scope.doLogin = function(){
  		FB.login(function(response) {
  			if (response.authResponse) {
  				console.log('Welcome!  Fetching your information.... ');
+ 				console.log('acess '  + response.authResponse.accessToken);
+ 				$scope.sendData($scope,response.authResponse.accessToken);
 
  				console.log(response.authResponse);	
  				FB.api('/me', function(response) {
  					console.log('Good to see you, ' + response.name + '.');
- 					$location.path($location.path()+ 'details');
- 					$route.reload();
+
  				});
  			} else {
  				console.log('User cancelled login or did not fully authorize.');
