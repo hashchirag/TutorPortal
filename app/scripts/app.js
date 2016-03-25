@@ -38,6 +38,10 @@
     templateUrl: 'views/confirmation.html',
     controller: 'ConfirmationCtrl'
   })
+  .when('/sorry', {
+    templateUrl: 'views/sorry.html',
+    controller: 'SorryCtrl'
+  })
   .when('/policytest', {
     templateUrl: 'views/policy.html',
     controller: 'PolicytestCtrl'
