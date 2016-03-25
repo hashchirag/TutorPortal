@@ -12,8 +12,12 @@
  angular.module('angularPortalApp')
  .controller('MainCtrl', function ($scope,$location,$route,$http) {
 
+
+ 	//Pushing the access token, writing to local storage.
  	$scope.sendData = function ($scope,access_token) {
- 		console.log(access_token);
+ 		
+
+
  		$http({
  			url: 'http://staging-now.hashlearn.com/api/users/tutorFacebookLogin/',
  			method: "POST",
@@ -22,7 +26,15 @@
  		})
  		.then(function(response) {
             // success
-            alert('success');
+            //Writing to session data
+            if(typeof(Storage) !== "undefined") {
+
+            	localStorage.setItem("accessToken", "Smith");
+
+            } else {
+            	alert("No web storage support,try a different browser");
+            }	
+
             $location.path($location.path()+ 'details');
             $route.reload();
         }, 
@@ -36,7 +48,6 @@
  		FB.login(function(response) {
  			if (response.authResponse) {
  				console.log('Welcome!  Fetching your information.... ');
- 				console.log('acess '  + response.authResponse.accessToken);
  				$scope.sendData($scope,response.authResponse.accessToken);
 
  				console.log(response.authResponse);	

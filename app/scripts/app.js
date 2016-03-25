@@ -37,6 +37,14 @@
     templateUrl: 'views/confirmation.html',
     controller: 'ConfirmationCtrl'
   })
+  .when('/lowergradelanding', {
+    templateUrl: 'views/lowergradelandingpage.html',
+    controller: 'LowergradelandingCtrl'
+  })  
+  .when('/lowergradetest', {
+    templateUrl: 'views/lowergradetest.html',
+    controller: 'LowergradetestCtrl'
+  })
   .otherwise({
     redirectTo: '/'
   });
