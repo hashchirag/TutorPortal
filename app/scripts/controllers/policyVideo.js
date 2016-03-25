@@ -13,7 +13,7 @@
  .controller('PolicyCtrl', function ($scope,$location,$route) {
 
 
- 	var $button = document.querySelector('.button2');
+ 	var $button = document.querySelector('#taketest');
  	$button.addEventListener('click', function() {
  		// var duration = 0.3,
  		// delay = 0.08;
