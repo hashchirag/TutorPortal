@@ -1,80 +1,75 @@
   <link rel="stylesheet" href="../styles/details.css" type="text/css">
-  <body ng-app="angularPortalApp">
-    <div class="confirm">
-      <i class='close'>×</i>
-      <h1><i class="fa fa-check-circle fa-3x"></i>Boom! Profile Created</h1>
+
+  <div class="container">
+    <form>
+      <h1>Tutor Registration</h1>
+
+      <div class="form-group">
+        <select id = "college">
+          <option>Value 1</option>
+          <option>Value 2</option>
+        </select>
+        <label for="select" class="control-label">Choose your college</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group" id="degree">
+        <select>
+          <option>Value 1</option>
+          <option>Value 2</option>
+        </select>
+        <label for="select" class="control-label">Choose your degree</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group" id="year">
+        <select>
+          <option>Value 1</option>
+          <option>Value 2</option>
+        </select>
+        <label for="select" class="control-label">Choose your year of graduation</label><i class="bar"></i>
+      </div>
+
+
+      <div class="form-group">
+        <input type="text" required="required" id ="year"/>
+        <label for="input" class="control-label">Enter your phone number</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group">
+        <input type="email" required="required" id = "email"/>
+        <label for="email" class="control-label">Enter your Email Address</label><i class="bar"></i>
+      </div>
+
+      <p>Choose Exam groups you wish to teach</p>
+
+      <div id="cb">
+
+      </div>
+
+      <div class="form-radio">
+        <div class="radio">
+          <label>
+            <input type="radio" name="radio" checked="checked"/><i class="helper"></i>I'm the label from a radio button
+          </label>
+        </div>
+
+        <div class="radio">
+          <label>
+            <input type="radio" name="radio"/><i class="helper"></i>I'm the label from a radio button
+          </label>
+        </div>
+      </div>
+
+
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"/><i class="helper"></i>I'm the label from a checkbox
+        </label>
+      </div>
+
+    </form>
+
+
+    <div class="button-container">
+      <button type="button" class="button"><span>Submit</span></button>
     </div>
-    <form action="#">
-      
-      <div class="float-label">
-        <input type="text" name="number" id="number" maxlength="10" required/>
-        <label for="number">Enter your mobile number</label>
-      </div>
-
-      <div class="float-label">
-        <input type="email" name="email" id="email"/>
-        <label for="email">Enter your email id</label>
-      </div>
-
-      <div class="float-label">
-        <i class="fa fa-caret-down"></i>
-        <select id="college" name="college">
-          <option value=""></option>
-          <option value="c1">college 1</option>
-        </select>    
-        <label for="college">Select your college</label>
-      </div>
-
-      <div class="float-label">
-        <i class="fa fa-caret-down"></i>
-        <select name="degree" id="degree">
-          <option value=""></option>
-          <option value="male">Male</option>
-          <option value="Female">Female</option>
-        </select>
-        <label for="gender">Select your Degree</label>
-      </div>
-
-      <div class="float-label">
-        <i class="fa fa-caret-down"></i>
-        <select name="year" id="year">
-          <option value=""></option>
-          <option value="male">Male</option>
-          <option value="Female">Female</option>
-        </select>
-        <label for="year">Chose your year of graduation</label>
-      </div>
-
-
-      <input id='one' type='checkbox' />
-      <label for='one'>
-        <span></span>
-        Off with your head
-        <ins><i>Off with your head</i></ins>
-      </label>
-
-      <input id='two' type='checkbox' />
-      <label for='two'>
-        <span></span>
-        Dance ’til you’re dead
-        <ins><i>Dance ’til you’re dead</i></ins>
-      </label>
-
-      <input id='three' type='checkbox' />
-      <label for='three'>
-        <span></span>
-        Heads will roll
-        <ins><i>Heads will roll</i></ins>
-      </label>
-
-      <input id='four' type='checkbox' />
-      <label for='four'>
-        <span></span>
-        On the floor
-        <ins><i>On the floor</i></ins>
-      </label>
-
-      <button class="btn" type="submit">Submit</button>
-      <button class="btn" id="clear" type="reset" value="Reset">Reset</button>
-    </form>  
-  </body>
+  </div>

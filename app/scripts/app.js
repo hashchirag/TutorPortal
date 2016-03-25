@@ -29,6 +29,14 @@
     templateUrl: 'views/details.html',
     controller: 'DetailsCtrl'
   })
+  .when('/policy', {
+    templateUrl: 'views/policyVideo.html',
+    controller: 'PolicyCtrl'
+  })
+  .when('/confirmation', {
+    templateUrl: 'views/confirmation.html',
+    controller: 'ConfirmationCtrl'
+  })
   .otherwise({
     redirectTo: '/'
   });

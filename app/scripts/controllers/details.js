@@ -2,80 +2,34 @@
 
 /**
  * @ngdoc function
- * @name angularPortalApp.controller:DetailsCtrl
+ * @name angularPortalApp.controller:MainCtrl
  * @description
- * # AboutCtrl
+ * # MainCtrl
  * Controller of the angularPortalApp
  */
 
+ 
  angular.module('angularPortalApp')
- .controller('DetailsCtrl', function($scope) {
+ .controller('DetailsCtrl', function ($scope,$location,$route) {
 
-   (function($){
-    function floatLabel(inputType){
-      $(inputType).each(function(){
-        var input = $(this).find("input, select, textarea");
-        var label = $(this).find("label");
-            // on focus add cladd active to label
-            input.focus(function(){
-              input.next().addClass("active");
-              console.log("focus");
-            });
-            //on blur check field and remove class if needed
-            input.blur(function(){
-              if(input.val() === '' || input.val() === 'blank'){
-                label.removeClass();
-              }
-            });
-          });
-    }
-    // just add a class of "floatLabel to any group you want to have the float label interactivity"
-    floatLabel(".float-label");
 
-    var x = document.getElementById("college");
-    var option = document.createElement("option");
-    option.text = "Kiwi";
-    x.add(option);
 
-//////  Just a bunch of fluff for other interactions  ////////////////////////////////////////////////////////  
+ 	$scope.addCheckbox = function(a){
+ 		var container = $('#cb');
+ 		var inputs = container.find('input');
+ 		var id = inputs.length+1;
 
-  //for the pw field - toggle visibility
-  $(".eye").on("click" , function(){
-    var $this = $(this);
-    if( !$this.is(".show") ){
-      $this.addClass("show")
-      .removeClass("fa-eye-slash")
-      .addClass("fa-eye").next()
-      .attr("type" , "text");
-    }else{
-      $this.removeClass("show")
-      .addClass("fa-eye-slash")
-      .removeClass("fa-eye")
-      .next().attr("type" , "password");
-    }
-  });
-  
-  //modal close
-  $(".close").on("click" , function(){
-    $(this).parent().removeClass("show");
-    $("#clear").click();
-  })
-  
-  //submit button dirty validation ^-^
-  $("button[type='submit']").on("click" , function(){
-    if( !$("input, select, textarea").val() ){ 
-      // $(this).text("Please enter all Fields");
-      alert("Please enter all the fields");
-    }else{
-      // $(".confirm").addClass("show");
-      
-    }
-    return false;
-  })
-  //just for reset button
-  $("#clear").on("click" , function(){
-    $(".active").removeClass("active");
-  });
-  
-})(jQuery);
-});
+ 		$('<input />', { type: 'checkbox', id: 'cb'+id, value: name }).appendTo(container);
+ 		$('<label />', { 'for': 'cb'+id, text: a}).appendTo(container);
+ 		$('</br>').appendTo(container);
+ 	}
+
+ 	$scope.array1= ["first","second"];
+
+ 	for(var i =0 ; i < $scope.array1.length ; i ++ ){
+ 		$scope.addCheckbox($scope.array1[i]);
+ 	}
+
+
+
+ });
