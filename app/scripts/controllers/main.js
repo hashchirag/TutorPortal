@@ -35,7 +35,7 @@
             	alert("No web storage support,try a different browser");
             }	
 
-            $location.path($location.path()+ 'details');
+            $location.path('/'+ 'details');
             $route.reload();
         }, 
     function(response) { // optional

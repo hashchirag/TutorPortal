@@ -1,6 +1,6 @@
 (function() {
 
-  var app = angular.module('myQuiz', ['ngMaterial']);
+  var app = angular.module('angularPortalApp');
   app.directive('mathJaxBind', function() {
     var refresh = function(element) {
       MathJax.Hub.Queue(["Typeset", MathJax.Hub, element]);
