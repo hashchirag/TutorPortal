@@ -55,6 +55,7 @@ header {
   max-width: 48em;
   margin: 0 auto;
   padding: 2.5em 0 4em;
+  margin-top : 120px;
 }
 
 .row.last {
@@ -207,6 +208,7 @@ input[type="radio"]:checked + label:before {
   opacity: 1;
   background: #2dceb1;
   color: #fbfbfb;
+  margin-top:200px;
   padding: 20px;
 }
 
@@ -283,4 +285,116 @@ footer {
 .attrib i {
   margin-right: 7px;
   margin-left: 7px;
+}
+
+
+.canvas {
+  height: 150px;
+  width: calc(100% - 50px);
+  position: absolute;
+  top:0px;
+  left: 0px;
+  background: #2DCEB1;
+  vertical-align: middle;
+  text-align: center;
+  margin-top: 50px;
+  margin-left: 30px;
+}
+
+.content-box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.timer-bar {
+  border-top: 10px solid rgba(0,0,0,.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  -webkit-transition: width .5s ease;
+  z-index: 10;
+}
+
+.timer-display {
+  font-size: 100px;
+  color: #fff;
+}
+
+.timer-info {
+  color: rgba(0,0,0,.5);
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+.finishing {
+  -webkit-animation: blink 10s ease forwards;
+}
+
+.green-to-orange {
+  -webkit-animation: green-to-orange forwards;
+}
+
+.orange-to-yellow {
+  -webkit-animation: orange-to-yellow forwards;
+}
+
+.yellow-to-red {
+  -webkit-animation: yellow-to-red forwards;
+}
+
+@-webkit-keyframes green-to-orange {
+  0% { background: #03D473; }
+  100% { background: #F47600; }
+}
+
+@-webkit-keyframes orange-to-yellow {
+  0% { background: #F47600; }
+  100% { background: #F5C502; }
+}
+
+@-webkit-keyframes yellow-to-red {
+  0% { background: #F5C502; }
+  100% { background: #F12D22; }
+}
+
+@-webkit-keyframes blink {
+  0% { opacity: 1; }
+  3% { opacity: 0; }
+  6% { opacity: 1; }
+  9% { opacity: 0; }
+  12% { opacity: 1; }
+  15% { opacity: 0; }
+  18% { opacity: 1; }
+  21% { opacity: 0; }
+  24% { opacity: 1; }
+  27% { opacity: 0; }
+  30% { opacity: 1; }
+  33% { opacity: 0; }
+  36% { opacity: 1; }
+  39% { opacity: 0; }
+  42% { opacity: 1; }
+  45% { opacity: 0; }
+  48% { opacity: 1; }
+  51% { opacity: 0; }
+  54% { opacity: 1; }
+  57% { opacity: 0; }
+  60% { opacity: 1; }
+  63% { opacity: 0; }
+  66% { opacity: 1; }
+  69% { opacity: 0; }
+  72% { opacity: 1; }
+  75% { opacity: 0; }
+  78% { opacity: 1; }
+  81% { opacity: 0; }
+  84% { opacity: 1; }
+  87% { opacity: 0; }
+  90% { opacity: 1; }
+  93% { opacity: 0; }
+  96% { opacity: 1; }
+  99% { opacity: 0; }
+  100% { opacity: 1; }
 }

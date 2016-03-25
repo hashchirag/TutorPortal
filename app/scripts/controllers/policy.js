@@ -14,6 +14,7 @@
 
   (function($) {
     $.fn.emc = function(options) {
+      var countDownTime = 5;
 
       var defaults = {
         key: [],
@@ -71,9 +72,95 @@
     checkCookie();
     startTest();
 
-    function startTest() {
-      var http = new XMLHttpRequest();
-      var url = "http://staging-now.hashlearn.com:80/api/users/tutor/testStart/";
+
+  //Timer part
+  function CountDown(container, time) {
+    this.container = container;
+    this.display = container.querySelector('.timer-display');
+    this.bar = container.querySelector('.timer-bar');
+    this.time = time;
+    this.remainingTime = this.time;
+    this.elapsedTime = 0;
+
+    this.updateDisplay();
+  }
+
+  CountDown.fn = CountDown.prototype;
+
+  CountDown.fn.updateCounters = function() {
+    this.remainingTime -= 1;
+    this.elapsedTime += 1;
+
+    //Case of time ended. Display Results
+    if (this.remainingTime == -1) {
+      scoreNormal();
+    }
+
+  };
+
+  CountDown.fn.updateDisplay = function() {
+    this.display.innerText = parseInt(this.remainingTime / 60, 10) + ':' + ('0' + (this.remainingTime % 60)).substr(-2);
+  };
+
+  CountDown.fn.updateCanvasColor = function() {
+    var remainingTimePercentage = this.remainingTime / this.time;
+    var transition, duration;
+
+    if (remainingTimePercentage <= 0.7) {
+      transition = 'green-to-orange';
+      duration = 0.2 * this.time;
+    }
+
+    if (remainingTimePercentage <= 0.5) {
+      transition = 'orange-to-yellow';
+      duration = 0.1 * this.time;
+    }
+
+    if (remainingTimePercentage <= 0.4) {
+      transition = 'yellow-to-red';
+      duration = 0.4 * this.time;
+    }
+
+    if (transition && duration) {
+      this.container.style['-webkit-animation-duration'] = duration + 's';
+      this.container.classList.add(transition);
+    }
+  };
+
+  CountDown.fn.updateBarWidth = function() {
+    this.bar.style.width = (this.elapsedTime / this.time * 100) + '%';
+  };
+
+  CountDown.fn.checkFinalTime = function() {
+    if (this.remainingTime === 10) {
+      this.display.classList.add('finishing');
+    }
+  };
+
+  CountDown.fn.init = function() {
+    var tid = setInterval(function() {
+      if (this.remainingTime === -1) {
+        return clearInterval(tid);
+      }
+
+      this.updateCounters();
+      this.updateDisplay();
+      this.updateCanvasColor();
+      this.updateBarWidth();
+      this.checkFinalTime();
+    }.bind(this), 1000);
+
+    // this.button.innerText = 'Done!';
+  };
+
+
+  var mCountDownTimer = new CountDown(document.querySelector('.canvas'),countDownTime);
+  mCountDownTimer.init();
+  //End of timer
+
+  function startTest() {
+    var http = new XMLHttpRequest();
+    var url = "http://staging-now.hashlearn.com:80/api/users/tutor/testStart/";
       // var params = "lorem=ipsum&name=binny";
       var params = "username=" + username;
       console.log(" policy username=" + username);
