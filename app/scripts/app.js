@@ -37,6 +37,18 @@
     templateUrl: 'views/confirmation.html',
     controller: 'ConfirmationCtrl'
   })
+  .when('/policytest', {
+    templateUrl: 'views/policy.html',
+    controller: 'PolicytestCtrl'
+  })
+  .when('/communicationtest', {
+    templateUrl: 'views/communication.html',
+    controller: 'CommunicationtestCtrl'
+  })
+  .when('/iittest', {
+    templateUrl: 'views/academicTest.html',
+    controller: 'IitCtrl'
+  })
   .when('/lowergradelanding', {
     templateUrl: 'views/lowergradelandingpage.html',
     controller: 'LowergradelandingCtrl'
