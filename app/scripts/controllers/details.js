@@ -10,45 +10,96 @@
 
  
  angular.module('angularPortalApp')
- .controller('DetailsCtrl', function ($scope,$location,$route) {
+ .controller('DetailsCtrl', function ($scope,$location,$route,$http) {
 
- 	$scope.addCheckbox = function(text,exam){
- 		var container = $('#cb');
- 		var inputs = container.find('input');
- 		var id = inputs.length+1;
+ 	$scope.listOfColleges = [];
+ 	$scope.listOfDegrees = [];
 
- 		$('<input />', { type: 'checkbox', id: 'cb'+id, value: text, name : exam }).appendTo(container);
- 		$('<label />', { 'for': 'cb'+id, text: text}).appendTo(container);
- 	}
 
- 	$scope.addOptionToDropDown = function(parent,text){
- 		var x = document.getElementById(parent);
- 		var option = document.createElement("option");
- 		option.text = text;
- 		x.add(option);
- 	}
 
- 	$scope.array1= ["first","second"];
- 	$scope.graduationYears= ["1950","1951","1952","1953","1954","1955","1956","1957","1958","1959","1960","1961","1962","1963","1964","1965","1966","1967","1968","1969","1970","1971","1971","1972","1973","1974","1975","1976","1977","1978","1979","1980","1981","1982","1983","1984","1985","1986","1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"];
+ 	//GETTING LIST OF COLLEGES
+ 	$http({
+ 		method: 'GET',
+ 		url: 'http://staging-now.hashlearn.com/api/users/collegeList'
+ 	}).then(function successCallback(response) {
+    // this callback will be called asynchronously
+    // when the response is available
+    var jsonString = JSON.stringify(response);
+
+    var obj = JSON.parse(jsonString);
+    var objData = obj.data;
+
+    for (var i=0; i<objData.length; i++){;
+    	$scope.listOfColleges[objData[i].name] = objData[i].id;
+    }
+
+    console.log($scope.listOfColleges);
+
+     	//POPULATING COLLEGE DROP DOWN
+
+     	for(var nameOfCollege in $scope.listOfColleges){
+     		$scope.addOptionToDropDown("college", nameOfCollege);
+     	}
+     }, function errorCallback(response) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+    alert("An error has occured. Please contact HashLearn Now");
+});
+
+ 	//GETTING LIST OF DEGREES
+ 	$http({
+ 		method: 'GET',
+ 		url: 'http://staging-now.hashlearn.com/api/users/degreeList'
+ 	}).then(function successCallback(response) {
+    // this callback will be called asynchronously
+    // when the response is available
+    var jsonString = JSON.stringify(response);
+
+    var obj = JSON.parse(jsonString);
+    var objData = obj.data;
+
+    for (var i=0; i<objData.length; i++){;
+    	$scope.listOfDegrees[objData[i].name] = objData[i].id;
+    }
+
+    	//POPULATING COLLEGE DROP DOWN
+
+    	for(var nameOfDegree in $scope.listOfDegrees){
+    		$scope.addOptionToDropDown("degree", nameOfDegree);
+    	}
+    }, function errorCallback(response) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+    alert("An error has occured. Please contact HashLearn Now");
+});
+
+	// HELPER FUNCTIONS
+	$scope.addCheckbox = function(text,exam){
+		var container = $('#cb');
+		var inputs = container.find('input');
+		var id = inputs.length+1;
+
+		$('<input />', { type: 'checkbox', id: 'cb'+id, value: text, name : exam }).appendTo(container);
+		$('<label />', { 'for': 'cb'+id, text: text}).appendTo(container);
+	}
+
+	$scope.addOptionToDropDown = function(parent,text){
+		var x = document.getElementById(parent);
+		var option = document.createElement("option");
+		option.text = text;
+		x.add(option);
+	}
+	//END OF HELPER FUNCTIONS
+
+
+	$scope.array1= ["first","second"];
+	$scope.graduationYears= ["1950","1951","1952","1953","1954","1955","1956","1957","1958","1959","1960","1961","1962","1963","1964","1965","1966","1967","1968","1969","1970","1971","1971","1972","1973","1974","1975","1976","1977","1978","1979","1980","1981","1982","1983","1984","1985","1986","1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"];
 
 
  	//POPULATING EXAM GROUPS CHECK BOXES
 
  	for(var i =0 ; i < $scope.array1.length ; i ++ ){
  		$scope.addCheckbox($scope.array1[i],"exam");
- 	}
-
-
- 	//POPULATING COLLEGE DROP DOWN
-
- 	for(var i =0 ; i < $scope.array1.length ; i ++ ){
- 		$scope.addOptionToDropDown("college", ($scope.array1[i]));
- 	}
-
- 	//POPULATING DEGREE DROP DOWN
-
- 	for(var i =0 ; i < $scope.array1.length ; i ++ ){
- 		$scope.addOptionToDropDown("degree", ($scope.array1[i]));
  	}
 
  	//POPULATING GRADUATION YEAR DROP DOWN
@@ -66,8 +117,11 @@ $("#submit").click(function(){
 	var canSubmit=true;
 
 	var selectedExamGroups = $scope.getListOfExamGroups();
-	var selectedCollege = $scope.getCollegeName();
-	var selectedDegree = $scope.getDegreeName();
+	var selectedCollege = $scope.listOfColleges[$scope.getCollegeName()];
+	console.log(selectedCollege);
+	var selectedDegree = $scope.listOfDegrees[$scope.getDegreeName()];
+	console.log(selectedDegree);
+
 	var selectedGraduationYear = $scope.getGraduationYear();
 
 	// Validating Phone number and Email id
