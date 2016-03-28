@@ -1,4 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto);
+@import "compass/css3";
+
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+$base: #158EC6;
+$whiteLight: #fafafa;
 body,
 input,
 select,
@@ -402,3 +408,4 @@ fieldset {
 .button:focus {
   outline: none;
 }
+
