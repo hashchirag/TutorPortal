@@ -80,7 +80,7 @@
       }
     }
 
-    checkCookie();
+    // checkCookie();
 
     //Timer part
     function CountDown(container, time) {
@@ -238,13 +238,27 @@
         $this.removeClass('item-incorrect').addClass('item-correct');
       }
     });
-
     score = ((itemCount - wrong.length) / itemCount).toFixed(2) * 100 + "%";
-    $scoreEl.html("You scored a " + score + "<br />" + "<a class = 'next' href = 'academicTest.html'>Take the Academic Test</a>").addClass('new-score');
+
+    if( wrong.length >=5 ){
+      $scoreEl.html("You scored a " + score + "<br />" + "<a class = 'next'>Proceed</a>").addClass('new-score');
+      $scoreEl.click(function(){
+
+        $location.path('/'+ 'sorry');
+        $route.reload();
+      });
+    }
+    else{
+      $scoreEl.html("You scored a " + score + "<br />" + "<a class = 'next'>Take the communication Test</a>").addClass('new-score');
+      $scoreEl.click(function(){
+        $location.path('/'+ 'iittest');
+        $route.reload();
+      });
+    }
+
     $('html,body').animate({
       scrollTop: 0
     }, 50);
-
     if (count == 0) {
         //Post
         var http = new XMLHttpRequest();

@@ -14,7 +14,7 @@
 
   (function($) {
     $.fn.emc = function(options) {
-      var countDownTime = 5;
+      var countDownTime = 2;
 
       var defaults = {
         key: [],
@@ -69,7 +69,7 @@
 
     }
 
-    checkCookie();
+    // checkCookie();
     startTest();
 
 
@@ -234,6 +234,9 @@
       if (chosen.length === itemCount) {
         $submit.addClass('ready-show');
         $submit.click(function() {
+
+          $('#canvasID').hide();
+
           return scoreNormal();
         });
       }
@@ -258,7 +261,25 @@
       });
 
       score = ((itemCount - wrong.length) / itemCount).toFixed(2) * 100 + "%";
-      $scoreEl.html("You scored a " + score + "<br />" + "<a class = 'next' href = 'communication.html'>Take the communication Test</a>").addClass('new-score');
+      console.log(score);
+      
+      //More than 5 wrong
+      if( wrong.length >= 5 ){
+        $scoreEl.html("You scored a " + score + "<br />" + "<a class = 'next'>Proceed</a>").addClass('new-score');
+        $scoreEl.click(function(){
+
+          $location.path('/'+ 'sorry');
+          $route.reload();
+        });
+      }
+      else{
+        $scoreEl.html("You scored a " + score + "<br />" + "<a class = 'next'>Take the communication Test</a>").addClass('new-score');
+        $scoreEl.click(function(){
+          $location.path('/'+ 'communicationtest');
+          $route.reload();
+        });
+      }
+
       $('html,body').animate({
         scrollTop: 0
       }, 50);
