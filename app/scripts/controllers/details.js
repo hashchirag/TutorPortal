@@ -19,6 +19,7 @@
 	//HIDE
 	$('#studentPics').hide();
 	$('#graduatePics').hide();
+	$('#customCollege').hide();
 
  	//GETTING LIST OF COLLEGES
  	$http({
@@ -39,6 +40,7 @@
     console.log($scope.listOfColleges);
 
      	//POPULATING COLLEGE DROP DOWN
+     	$scope.addOptionToDropDown("college", "Other");
 
      	for(var nameOfCollege in $scope.listOfColleges){
      		$scope.addOptionToDropDown("college", nameOfCollege);
@@ -66,6 +68,7 @@
     }
 
     	//POPULATING COLLEGE DROP DOWN
+    	$scope.addOptionToDropDown("degree", "Other");
 
     	for(var nameOfDegree in $scope.listOfDegrees){
     		$scope.addOptionToDropDown("degree", nameOfDegree);
@@ -246,6 +249,22 @@ $scope.getListOfLanguages = function(){
 }
 
 
+$("#college").change(function (){
+	if(($(this).val() == 'Other')){
+		$('#customCollege').show();
+	}
+	else{
+		$('#customCollege').hide();
+	}
+});
 
+$("#degree").change(function (){
+	if(($(this).val() == 'Other')){
+		$('#customDegree').show();
+	}
+	else{
+		$('#customDegree').hide();
+	}
+});
 
 });

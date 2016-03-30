@@ -50,7 +50,7 @@
 
     alert("Please note that each question can be viewed and anwered only once. Clicking on an answer selects and submits it automatically.");
 
-    checkCookie();
+    // checkCookie();
 
     $scope.finalBackEndMappingArray = [41, 37, 31, 35, 36, 42, 43, 32, 37, 38, 40, 29, 9, 9, 15, 14, 10, 16, 11, 19, 19, 17, 20, 20, 21, 21, 23, 22, 22, 26, 24,
     25, 47, 48, 46, 51, 53, 54, 58, 59, 60, 65, 67, 63, 56, 57, 60, 62, 66, 68, 69, 70, 72, 71, 55, 68
