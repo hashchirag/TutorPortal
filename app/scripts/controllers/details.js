@@ -14,6 +14,7 @@
 
  	$scope.listOfColleges = [];
  	$scope.listOfDegrees = [];
+ 	$scope.listOfExams = [];
 
 
 	//HIDE
@@ -44,6 +45,35 @@
 
      	for(var nameOfCollege in $scope.listOfColleges){
      		$scope.addOptionToDropDown("college", nameOfCollege);
+     	}
+     }, function errorCallback(response) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+    alert("An error has occured. Please contact HashLearn Now");
+});
+
+ 	//GETTING LIST OF EXAMS
+ 	$http({
+ 		method: 'GET',
+ 		url: 'http://staging-now.hashlearn.com/api/exams'
+ 	}).then(function successCallback(response) {
+    // this callback will be called asynchronously
+    // when the response is available
+    var jsonString = JSON.stringify(response);
+
+    var obj = JSON.parse(jsonString);
+    var objData = obj.data;
+
+    for (var i=0; i<objData.length; i++){;
+    	$scope.listOfExams[objData[i].name] = objData[i].id;
+    }
+
+    console.log($scope.listOfExams);
+
+     	//POPULATING COLLEGE DROP DOWN
+
+     	for(var nameOfCollege in $scope.listOfExams){
+     		$scope.addCheckbox('#examGroups', nameOfCollege, "exam");
      	}
      }, function errorCallback(response) {
     // called asynchronously if an error occurs
@@ -104,9 +134,9 @@
 
  	//POPULATING EXAM GROUPS CHECK BOXES
 
- 	for(var i =0 ; i < $scope.array1.length ; i ++ ){
- 		$scope.addCheckbox('#examGroups',$scope.array1[i],"exam");
- 	}
+ 	// for(var i =0 ; i < $scope.array1.length ; i ++ ){
+ 	// 	$scope.addCheckbox('#examGroups',$scope.array1[i],"exam");
+ 	// }
 
  	//POPULATING GRADUATION YEAR DROP DOWN
 
