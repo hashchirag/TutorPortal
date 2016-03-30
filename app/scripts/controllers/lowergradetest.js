@@ -398,11 +398,14 @@ Quiz.prototype.render = function(container) {
       consolidated_results = consolidated_results + che_score_string + "Chemistry : <b>" + che_score + "/10 </b>" + "<br/>";
     }
     $('#quiz-results-score').html(consolidated_results);
+    $('#canvas').hide();
+
 
     // $('#quiz-results-score').html('You got <b>' + score + '/' + self.questions.length + '</b> questions correct.');
     $('#quiz-results').slideDown();
     $('#quiz button').slideUp();
   }
+
 
   $('#submit-button').click(function(e) {
     submitButtonFunction();

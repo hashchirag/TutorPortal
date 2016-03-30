@@ -14,10 +14,7 @@
  	var $button = document.querySelector('#proceed');
  	$button.addEventListener('click', function() {
  		
- 		var res = $location.path().replace("confirmation", "policy");
- 		$location.path(res);
-
+ 		$location.path('/'+ 'policy');
  		$route.reload();
- 		alert('async()');
  	});
  });

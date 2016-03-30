@@ -95,7 +95,7 @@
 
       if (selected_atleast_one){
         // window.location = "lowergradetest.html";
-        $location.path($location.path()+ 'lowergradetest');
+        $location.path('/'+ 'lowergradetest');
         $route.reload();
       }
 
