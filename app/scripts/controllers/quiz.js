@@ -17,7 +17,7 @@
 
   app.controller('IitCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
 
-    $scope.finalScore = [0, 0, 0, 0, 0];
+    $scope.finalScore =[];
 
     var username = "";
 
@@ -164,8 +164,10 @@
 
     $scope.selected = [];
     $scope.answersArray = [];
-    $scope.totalQuestions = 15;
+    $scope.totalQuestions ;
     $scope.ended = true;
+
+    $scope.selectedTopicsLength = 0;
 
     $scope.drawCanvas = (function drawCanvas() {
       var canvas = document.getElementById('mycanvas');
@@ -173,8 +175,8 @@
       var cWidth = canvas.width;
       var cHeight = canvas.height;
 
-      $scope.countTo = 2700;
-      $scope.counToTime = 2700;
+      $scope.countTo = $scope.selectedTopicsLength * 180 * 3;
+      $scope.counToTime = $scope.selectedTopicsLength * 180 * 3 ;
 
       var min = Math.floor($scope.countTo / 60);
       var sec = $scope.countTo - (min * 60);
@@ -476,15 +478,19 @@
 
 
     $scope.startQuiz = function(selLength) {
-      if (selLength == 5) {
+      if (selLength >=5 && selLength <=15 ) {
+
+        $scope.selectedTopicsLength = selLength;
+
+        $scope.totalQuestions = selLength * 3;
         $scope.activeQuestion = 0;
         $scope.drawCanvas();
         for (var i = 0; i < selLength; i++) {
-          console.log($scope.selected[i]);
+          // console.log($scope.selected[i]);
           $scope.loadAndPopulate($scope.selected[i], i);
         }
       } else {
-        alert("Please choose only 5 topics.");
+        alert("Please choose more alteast 5 topics and a maximum of 15 topics");
       }
     }
 
@@ -508,7 +514,7 @@
           $scope.answersArray[qIndex] = 1;
           $scope.finalScore[qIndex / 3]++;
           // alert($scope.finalScore[qIndex / 3]);
-          console.log(qIndex);
+          // console.log(qIndex);
           // $scope.finalJSON[$scope.selected[qIndex / 3]].success = 'true';
           // console.log(JSON.stringify($scope.finalJSON));
           $scope.score += 1;
@@ -538,7 +544,7 @@
       var url = "http://now.hashlearn.com:80/api/users/tutor/topicTestResult/";
       // var params = "lorem=ipsum&name=binny";
       var params = "username=" + username + "&questions_attempted=3&questions_correct=" + scoreScored + "&test_type=jee" + "&chapter_id=" + catId;
-      console.log("Parameters are  - username=" + username + "&questions_attempted=15&questions_correct=" + scoreScored + "&test_type=policy");
+      // console.log("Parameters are  - username=" + username + "&questions_attempted=15&questions_correct=" + scoreScored + "&test_type=policy");
 
       http.open("POST", url, true);
 
@@ -562,13 +568,34 @@
 
       $scope.activeQuestion += 1;
 
+      $scope.k = 0;
+
+      $scope.x = 0;
+
       if ($scope.activeQuestion == $scope.totalQuestions) {
-        $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[0])], 0 + $scope.answersArray[0] + $scope.answersArray[1] + $scope.answersArray[2]);
-        $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[1])], 0 + $scope.answersArray[3] + $scope.answersArray[4] + $scope.answersArray[5]);
-        $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[2])], 0 + $scope.answersArray[6] + $scope.answersArray[7] + $scope.answersArray[8]);
-        $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[3])], 0 + $scope.answersArray[9] + $scope.answersArray[10] + $scope.answersArray[11]);
-        $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[4])], 0 + $scope.answersArray[12] + $scope.answersArray[13] + $scope.answersArray[14]);
+
+        for(var i = 0 ; i < $scope.totalQuestions/3; i ++ ) {
+          $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[i])], i + $scope.answersArray[$scope.k*i] + $scope.answersArray[($scope.k*i)+1] + $scope.answersArray[($scope.k*i)+2]);
+          $( "#result" ).append( "<p>"+  $scope.finalArray[$scope.finalArrayIndex.indexOf($scope.selected[i])] + "-" +  $scope.answersArray[$scope.x++]  + $scope.answersArray[$scope.x++] + $scope.answersArray[$scope.x++] + "/3"+"<br /></p>" );
+          
+          console.log("k*i = "   + Number($scope.k*i));
+          console.log("$scope.k*i + 1  = "   + Number(($scope.k*i)+1));
+          console.log("$scope.k*i + 2  = "   + Number(($scope.k*i)+2));
+          $scope.k = $scope.k + 1;
+
+
+        }
       }
+      // console.log($scope.answersArray);
+
+
+      // if ($scope.activeQuestion == $scope.totalQuestions) {
+      //   $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[0])], 0 + $scope.answersArray[0] + $scope.answersArray[1] + $scope.answersArray[2]);
+      //   $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[1])], 0 + $scope.answersArray[3] + $scope.answersArray[4] + $scope.answersArray[5]);
+      //   $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[2])], 0 + $scope.answersArray[6] + $scope.answersArray[7] + $scope.answersArray[8]);
+      //   $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[3])], 0 + $scope.answersArray[9] + $scope.answersArray[10] + $scope.answersArray[11]);
+      //   $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[4])], 0 + $scope.answersArray[12] + $scope.answersArray[13] + $scope.answersArray[14]);
+      // }
 
       return $scope.activeQuestion;
     }

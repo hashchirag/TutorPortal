@@ -137,7 +137,7 @@
       </div>
     </div>
 
-    <div class="result {{ (totalQuestions === activeQuestion) ? 'active' : 'inactive'}}">
+    <div class="result {{ (totalQuestions === activeQuestion) ? 'active' : 'inactive'}}" id = "result">
       <p>
         <strong>You scored
           {{percentage}}% by answering
@@ -147,7 +147,7 @@
           questions.<br/><br />
           Summary <br />
         </strong>
-        <p>
+<!--         <p>
           {{ finalArray[  finalArrayIndex.indexOf(selected[0]) ] }} - {{ answersArray[0]  + answersArray[1] + answersArray[2] }}/3<br />
         </p>
         <p>
@@ -161,7 +161,7 @@
         </p>
         <p>
           {{ finalArray[  finalArrayIndex.indexOf(selected[4]) ] }} - {{ answersArray[12]  + answersArray[13] + answersArray[14] }}/3<br />
-        </p>
+        </p> -->
 
         <div class="btn" ng-click ="redirect()">Done
         </div>
