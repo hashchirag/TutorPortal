@@ -2,7 +2,7 @@
   
   <body>
     <div class = "container"
-    <form>
+    <form id="mForm">
       <h1>Tutor Registration</h1>
 
       <div class="form-group">
@@ -47,10 +47,25 @@
       <div id="languages" class="material_block">
       </div></br>
 
+      <p>Are you a student or a graduate ?</p>
 
 
-      Select a file: <input type="file" name="img"></br></br>
-      Select another file: <input type="file" name="img">
+      <div class="material_block">
+        <input id="student" name="studentOrGraduate" type="radio" class="material_radio" value="student">
+        <label for="student">Student</label>
+        <input id="graduate" name="studentOrGraduate" type="radio" class="material_radio" value = "graduate">
+        <label for="graduate">Graduate</label>
+      </div>
+
+      <div id = "studentPics">
+        Upload snapshot of FRONT section of your ID Card <input type="file" name="img"></br></br>
+        Upload snapshot of BACK section of your ID Card: <input type="file" name="img"></br></br>
+
+      </div>
+      <div id = "graduatePics">
+        Upload snapshot of your ID Card: <input type="file" name="img"></br></br>
+        Upload snapshot of your degree certificate <input type="file" name="img">
+      </div>
 
 <!--       <div class="checkbox">
         <label>

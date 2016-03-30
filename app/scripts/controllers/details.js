@@ -16,6 +16,9 @@
  	$scope.listOfDegrees = [];
 
 
+	//HIDE
+	$('#studentPics').hide();
+	$('#graduatePics').hide();
 
  	//GETTING LIST OF COLLEGES
  	$http({
@@ -113,7 +116,18 @@
  		$scope.addCheckbox('#languages',$scope.array1[i],"language");
  	}
 
-
+ 	// HIDE AND DISPLAY PICTURE UPLOADING SECTIONS
+ 	$('#mForm input').on('change', function() {
+ 		if (($('input[name="studentOrGraduate"]:checked', '#mForm').val()) == 'student')
+ 		{
+ 			$('#graduatePics').hide();
+ 			$('#studentPics').show();
+ 		}
+ 		else{
+ 			$('#studentPics').hide();
+ 			$('#graduatePics').show();
+ 		}
+ 	});
 
 
 //FORM SUBMIT BUTTON

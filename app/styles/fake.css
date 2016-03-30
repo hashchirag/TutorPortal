@@ -493,3 +493,53 @@ fieldset {
 .material_checkbox:nth-child(21):checked:before{border-color:#337AB7;}
 .material_checkbox:nth-child(23):checked:before{border-color:#337AB7;}
 .material_checkbox:nth-child(25):checked:before{border-color:#337AB7;}
+
+.material_radio
+{
+  position: relative;
+  margin: 25px;
+}
+
+.material_radio:before
+{
+  border: 3px solid #ccc;
+  border-radius: 100%;
+  content: "";
+  cursor: pointer;
+  display: block;
+  height: 15px;
+  position: absolute;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  width: 15px;
+  z-index: 1;
+}
+
+.material_radio:checked:before
+{
+  -moz-transform: scale(.75);
+  -ms-transform: scale(.75);
+  -o-transform: scale(.75);
+  -webkit-transform: scale(.75);
+  transform: scale(.75);
+  background: #ccc;
+}
+
+.material_radio:after
+{
+  background: #fff;
+  content: "";
+  display: block;
+  height: 15px;
+  position: absolute;
+  top: 0;
+  width: 15px;
+  z-index: 0;
+}
+
+.material_radio:nth-child(1):checked:before{background-color:#337AB7;}
+.material_radio:nth-child(3):checked:before{background-color:#337AB7;}
+.material_radio:nth-child(5):checked:before{background-color:#337AB7;}
+.material_radio:nth-child(7):checked:before{background-color:#673ab7;}
