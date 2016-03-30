@@ -1,5 +1,4 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto);
-@import "compass/css3";
 
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
@@ -28,6 +27,8 @@ body *::before {
 body {
   background-image: -webkit-linear-gradient(top, #f2f2f2, #e6e6e6);
   background-image: linear-gradient(top, #f2f2f2, #e6e6e6);
+  background-image: url('../images/bg.png');
+
 }
 
 h1 {
@@ -409,190 +410,101 @@ fieldset {
   outline: none;
 }
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
-body {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
-  padding-top: 20px;
-  background-image: url('../images/bg.png');
+@import "bourbon";
 
-}
+// options
+$option-color:           #cbd1d8;
+$checked-option-color:   #40e0d0;
+$option-size:            40px;
+$explosion-distance:     5; // multiplied by $option-size
+$explosion-duration:     0.65s;
 
-form {
-  width: 80%;
-  margin: 0 auto;
-}
-
-h1 {
-  font-size: 30px;
-  line-height: 3;
-  text-align: center;
-  font-weight: 700;
-  line-height: 1;
-  margin-bottom: 30px;
-}
-h1 span {
-  margin-top: 10px;
-  display: block;
-  font-weight: 300;
-  font-size: 70%;
-  line-height: 1.2;
+// on-click animation
+@include keyframes(click-wave) {
+  $offset: ((($option-size * $explosion-distance) - $option-size) / 2);
+  
+  0% {
+    @include size($option-size);
+    opacity: 0.35;
+    position: relative;
+  }
+  
+  100% {
+    @include size($option-size*$explosion-distance);
+    margin-left: -$offset;
+    margin-top: -$offset;
+    opacity: 0;
+  }
 }
 
-div.controls {
-  margin-bottom: 12px;
-  border: 1px dotted #fafafa;
-  padding: 25px 20px;
-  position: relative;
-  margin-bottom: 20px;
-}
-div.controls h1 {
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1;
-  text-transform: uppercase;
-  display: inline-block;
-  position: absolute;
-  left: 10px;
-  top: -10px;
-  padding: 0 10px;
-  background-color: #54bded;
-}
-
-input[type='radio'],
-input[type='checkbox'] {
-  display: none;
+// Checkbox/Radio replacement
+.option-input {
+  @include appearance(none);
+  @include position($option-size/3 0 0 0);
+  @include size($option-size);
+  @include transition;
+  background: $option-color;
+  border: none;
+  color: #fff;
   cursor: pointer;
-}
-input[type='radio']:focus, input[type='radio']:active,
-input[type='checkbox']:focus,
-input[type='checkbox']:active {
+  display: inline-block;
+  margin-right: 0.5rem;
   outline: none;
-}
-input[type='radio'] + label,
-input[type='checkbox'] + label {
-  cursor: pointer;
-  display: inline-block;
   position: relative;
-  padding-left: 25px;
-  margin-right: 10px;
-  color: #0b4c6a;
+  z-index: 1000;
+
+  &:hover {
+    background: darken($option-color, 15%);
+  }
+
+  &:checked {
+    background: $checked-option-color;
+
+    // checkmark
+    &::before {
+      @include size($option-size);
+      @include position(absolute);
+      content: '\2716';
+      display: inline-block;
+      font-size: $option-size/1.5;
+      text-align: center;
+      line-height: $option-size;
+    }
+
+    // animted wave
+    &::after {
+      @include animation(click-wave $explosion-duration);
+      background: $checked-option-color;
+      content: '';
+      display: block;
+      position: relative;
+      z-index: 100;
+    }
+  }
+  
+  &.radio {
+    border-radius: 50%;    
+
+    &::after {
+      border-radius: 50%;
+    }
+  }
 }
-input[type='radio'] + label:before, input[type='radio'] + label:after,
-input[type='checkbox'] + label:before,
-input[type='checkbox'] + label:after {
-  content: '';
-  font-family: helvetica;
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  left: 0;
-  bottom: 0;
+
+// Demo styles
+body {
+  @include box(horizontal, start, stretch);
+  background: #e8ebee;
+  color: darken($option-color, 15%);
+  font-family: $helvetica;
   text-align: center;
-  position: absolute;
-}
-input[type='radio'] + label:before,
-input[type='checkbox'] + label:before {
-  background-color: #fafafa;
-  -moz-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-input[type='radio'] + label:after,
-input[type='checkbox'] + label:after {
-  color: #fff;
-}
-input[type='radio']:checked + label:before,
-input[type='checkbox']:checked + label:before {
-  -moz-box-shadow: inset 0 0 0 10px #158EC6;
-  -webkit-box-shadow: inset 0 0 0 10px #158EC6;
-  box-shadow: inset 0 0 0 10px #158EC6;
-}
+  
+  div {
+    padding: 5rem;
+  }
 
-/*Radio Specific styles*/
-input[type='radio'] + label:before {
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-}
-input[type='radio'] + label:hover:after, input[type='radio']:checked + label:after {
-  content: '\2022';
-  position: absolute;
-  top: 0px;
-  font-size: 19px;
-  line-height: 15px;
-}
-input[type='radio'] + label:hover:after {
-  color: #c7c7c7;
-}
-input[type='radio']:checked + label:after, input[type='radio']:checked + label:hover:after {
-  color: #fff;
-}
-
-/*Checkbox Specific styles*/
-input[type='checkbox'] + label:before {
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-}
-input[type='checkbox'] + label:hover:after, input[type='checkbox']:checked + label:after {
-  content: "\2713";
-  line-height: 18px;
-  font-size: 14px;
-}
-input[type='checkbox'] + label:hover:after {
-  color: #c7c7c7;
-}
-input[type='checkbox']:checked + label:after, input[type='checkbox']:checked + label:hover:after {
-  color: #fff;
-}
-
-/*Toggle Specific styles*/
-input[type='checkbox'].toggle {
-  display: inline-block;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 55px;
-  height: 28px;
-  background-color: #fafafa;
-  position: relative;
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;
-  border-radius: 30px;
-  @inlcude box-shadow(none);
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-input[type='checkbox'].toggle:hover:after {
-  background-color: #c7c7c7;
-}
-input[type='checkbox'].toggle:after {
-  content: '';
-  display: inline-block;
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  background-color: #aeaeae;
-  top: 2px;
-  left: 2px;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-input[type='checkbox']:checked.toggle {
-  -moz-box-shadow: inset 0 0 0 15px #158EC6;
-  -webkit-box-shadow: inset 0 0 0 15px #158EC6;
-  box-shadow: inset 0 0 0 15px #158EC6;
-}
-input[type='checkbox']:checked.toggle:after {
-  left: 29px;
-  background-color: #fff;
+  label {
+    display: block;
+    line-height: $option-size;
+  }
 }
