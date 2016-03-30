@@ -568,25 +568,15 @@
 
       $scope.activeQuestion += 1;
 
-      $scope.k = 0;
-
       $scope.x = 0;
 
       if ($scope.activeQuestion == $scope.totalQuestions) {
-
+        $('#progress').hide();
         for(var i = 0 ; i < $scope.totalQuestions/3; i ++ ) {
           $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[i])], i + $scope.answersArray[$scope.k*i] + $scope.answersArray[($scope.k*i)+1] + $scope.answersArray[($scope.k*i)+2]);
-          $( "#result" ).append( "<p>"+  $scope.finalArray[$scope.finalArrayIndex.indexOf($scope.selected[i])] + "-" +  $scope.answersArray[$scope.x++]  + $scope.answersArray[$scope.x++] + $scope.answersArray[$scope.x++] + "/3"+"<br /></p>" );
-          
-          console.log("k*i = "   + Number($scope.k*i));
-          console.log("$scope.k*i + 1  = "   + Number(($scope.k*i)+1));
-          console.log("$scope.k*i + 2  = "   + Number(($scope.k*i)+2));
-          $scope.k = $scope.k + 1;
-
-
+          $( "#result" ).append( "<p>"+  $scope.finalArray[$scope.finalArrayIndex.indexOf($scope.selected[i])] + "-" +  Number($scope.answersArray[$scope.x++]  + $scope.answersArray[$scope.x++] + $scope.answersArray[$scope.x++]) + "/3"+"<br /></p>" );
         }
       }
-      // console.log($scope.answersArray);
 
 
       // if ($scope.activeQuestion == $scope.totalQuestions) {

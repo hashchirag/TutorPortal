@@ -32,7 +32,7 @@
       <div class="btn" ng-click="startQuiz(selected.length)">Start Test</div>
     </div>
     <canvas id="mycanvas" width="250" height="250"></canvas>
-    <div class="progress">
+    <div class="progress" id = "progress">
       <div class="{{ ($index===activeQuestion) ? 'on' : 'off '}}" "{{ (myQuestion.questionState === 'answered') ? 'answered' : 'unanswered'}}" "{{ (myQuestion.correctness === 'correct' ) ? 'correct' : 'incorrect' }}" ng-repeat="myQuestion in simpleJSON"></div>
     </div>
 
