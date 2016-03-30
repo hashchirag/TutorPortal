@@ -15,7 +15,21 @@
     };
   });
 
-  app.controller('IitCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
+  app.controller('IitCtrl', ['$scope', '$http', '$sce','$location','$route', function($scope, $http, $sce,$location,$route,$routeProvider) {
+
+
+    if(typeof(Storage) !== "undefined") {
+      var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
+      console.log(isLoggedIn);
+
+      if(isLoggedIn === null){
+        $location.path('/');
+        $route.reload();
+      }
+    }
+    else {
+      alert("Use an updated version of the browser to proceed");
+    }
 
     $scope.finalScore =[];
 

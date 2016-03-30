@@ -12,6 +12,23 @@
  angular.module('angularPortalApp')
  .controller('DetailsCtrl', function ($scope,$location,$route,$http) {
 
+
+ 	// See if logged into fb .If not, redirect to FB Login Page
+
+ 	if(typeof(Storage) !== "undefined") {
+ 		var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
+ 		console.log(isLoggedIn);
+
+ 		if(isLoggedIn === null){
+ 			$location.path('/');
+ 			$route.reload();
+ 		}
+ 	}
+ 	else {
+ 		alert("Use an updated version of the browser to proceed");
+ 	}
+
+
  	$scope.listOfColleges = [];
  	$scope.listOfDegrees = [];
  	$scope.listOfExams = [];
@@ -21,6 +38,8 @@
 	$('#studentPics').hide();
 	$('#graduatePics').hide();
 	$('#customCollege').hide();
+	$('#customDegree').hide();
+
 
  	//GETTING LIST OF COLLEGES
  	$http({

@@ -29,14 +29,16 @@
             //Writing to session data
             if(typeof(Storage) !== "undefined") {
 
-            	localStorage.setItem("accessToken", "Smith");
+            	// sessionStorage.setItem("accessToken", "Smith");
+            	sessionStorage.setItem("loggedIntoFB","true");
+            	$location.path('/'+ 'details');
+            	$route.reload();
 
             } else {
             	alert("No web storage support,try a different browser");
             }	
 
-            $location.path('/'+ 'details');
-            $route.reload();
+
         }, 
     function(response) { // optional
             // failed

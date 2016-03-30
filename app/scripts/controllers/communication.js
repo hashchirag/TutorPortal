@@ -12,7 +12,18 @@
  angular.module('angularPortalApp')
  .controller('CommunicationtestCtrl', function ($scope,$location,$route,$http) {(function($) {
   $.fn.emc = function(options) {
+    if(typeof(Storage) !== "undefined") {
+      var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
+      console.log(isLoggedIn);
 
+      if(isLoggedIn === null){
+        $location.path('/');
+        $route.reload();
+      }
+    }
+    else {
+      alert("Use an updated version of the browser to proceed");
+    }
 
     var countDownTime = 5;
 
