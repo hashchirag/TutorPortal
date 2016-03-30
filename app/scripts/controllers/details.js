@@ -74,12 +74,12 @@
 });
 
 	// HELPER FUNCTIONS
-	$scope.addCheckbox = function(text,exam){
-		var container = $('#cb');
+	$scope.addCheckbox = function(container,text,name){
+		var container = $(container);
 		var inputs = container.find('input');
 		var id = inputs.length+1;
 
-		$('<input />', { type: 'checkbox', id: 'cb'+id, value: text, name : exam }).appendTo(container);
+		$('<input />', { type: 'checkbox', id: 'cb'+id, value: text, name : name ,class : 'material_checkbox'}).appendTo(container);
 		$('<label />', { 'for': 'cb'+id, text: text}).appendTo(container);
 	}
 
@@ -92,20 +92,25 @@
 	//END OF HELPER FUNCTIONS
 
 
-	$scope.array1= ["first","second"];
+	$scope.array1= ["first","second","asd"];
 	$scope.graduationYears= ["1950","1951","1952","1953","1954","1955","1956","1957","1958","1959","1960","1961","1962","1963","1964","1965","1966","1967","1968","1969","1970","1971","1971","1972","1973","1974","1975","1976","1977","1978","1979","1980","1981","1982","1983","1984","1985","1986","1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"];
 
 
  	//POPULATING EXAM GROUPS CHECK BOXES
 
  	for(var i =0 ; i < $scope.array1.length ; i ++ ){
- 		$scope.addCheckbox($scope.array1[i],"exam");
+ 		$scope.addCheckbox('#examGroups',$scope.array1[i],"exam");
  	}
 
  	//POPULATING GRADUATION YEAR DROP DOWN
 
  	for(var i =0 ; i < $scope.graduationYears.length ; i ++ ){
  		$scope.addOptionToDropDown("year", ($scope.graduationYears[i]));
+ 	}
+
+ 	//POPULATING LANGUAGE CHECK BOXES
+ 	for(var i =0 ; i < $scope.array1.length ; i ++ ){
+ 		$scope.addCheckbox('#languages',$scope.array1[i],"language");
  	}
 
 
@@ -117,10 +122,17 @@ $("#submit").click(function(){
 	var canSubmit=true;
 
 	var selectedExamGroups = $scope.getListOfExamGroups();
+	console.log(selectedExamGroups);
+
+	var selectedLangs = $scope.getListOfLanguages();
+	console.log(selectedLangs);
+
 	var selectedCollege = $scope.listOfColleges[$scope.getCollegeName()];
 	console.log(selectedCollege);
+
 	var selectedDegree = $scope.listOfDegrees[$scope.getDegreeName()];
 	console.log(selectedDegree);
+
 
 	var selectedGraduationYear = $scope.getGraduationYear();
 
@@ -131,6 +143,11 @@ $("#submit").click(function(){
 
 	if(selectedExamGroups.length == 0){
 		alert('Choose atleast one exam');
+		canSubmit = false;
+	}
+
+	if(selectedLangs.length == 0){
+		alert('Choose atleast one language');
 		canSubmit = false;
 	}
 
@@ -202,14 +219,17 @@ $scope.getListOfExamGroups = function(){
 		selected.push($(this).val());
 	});
 
-	// if(selected.length == 0){
-	// 	alert("Choose atleast one exam group");
-	// 	return null;
-	// }
-	// else{
+	return selected;
+}
 
-		return selected;
-	}
+$scope.getListOfLanguages = function(){
+	var selectedLangs = [];
+	$("input[name='language']:checked").each(function() {
+		selectedLangs.push($(this).val());
+	});
+
+	return selectedLangs;
+}
 
 
 

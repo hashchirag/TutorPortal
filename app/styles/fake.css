@@ -410,101 +410,92 @@ fieldset {
   outline: none;
 }
 
-@import "bourbon";
+@import url(http://fonts.googleapis.com/css?family=RobotoDraft:500);
 
-// options
-$option-color:           #cbd1d8;
-$checked-option-color:   #40e0d0;
-$option-size:            40px;
-$explosion-distance:     5; // multiplied by $option-size
-$explosion-duration:     0.65s;
-
-// on-click animation
-@include keyframes(click-wave) {
-  $offset: ((($option-size * $explosion-distance) - $option-size) / 2);
-  
-  0% {
-    @include size($option-size);
-    opacity: 0.35;
-    position: relative;
-  }
-  
-  100% {
-    @include size($option-size*$explosion-distance);
-    margin-left: -$offset;
-    margin-top: -$offset;
-    opacity: 0;
-  }
+*
+{
+  font-family: 'RobotoDraft', sans-serif;
+  font-size: 15px;
 }
 
-// Checkbox/Radio replacement
-.option-input {
-  @include appearance(none);
-  @include position($option-size/3 0 0 0);
-  @include size($option-size);
-  @include transition;
-  background: $option-color;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  margin-right: 0.5rem;
-  outline: none;
+.material_block
+{
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,.4);
+  margin: 50px;
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.material_checkbox
+{
   position: relative;
-  z-index: 1000;
-
-  &:hover {
-    background: darken($option-color, 15%);
-  }
-
-  &:checked {
-    background: $checked-option-color;
-
-    // checkmark
-    &::before {
-      @include size($option-size);
-      @include position(absolute);
-      content: '\2716';
-      display: inline-block;
-      font-size: $option-size/1.5;
-      text-align: center;
-      line-height: $option-size;
-    }
-
-    // animted wave
-    &::after {
-      @include animation(click-wave $explosion-duration);
-      background: $checked-option-color;
-      content: '';
-      display: block;
-      position: relative;
-      z-index: 100;
-    }
-  }
-  
-  &.radio {
-    border-radius: 50%;    
-
-    &::after {
-      border-radius: 50%;
-    }
-  }
+  margin: 25px;
 }
 
-// Demo styles
-body {
-  @include box(horizontal, start, stretch);
-  background: #e8ebee;
-  color: darken($option-color, 15%);
-  font-family: $helvetica;
-  text-align: center;
-  
-  div {
-    padding: 5rem;
-  }
-
-  label {
-    display: block;
-    line-height: $option-size;
-  }
+.material_checkbox:focus
+{
+  outline-color: #fff;
 }
+
+.material_checkbox:before
+{
+  border: 2px solid #ccc;
+  content: "";
+  cursor: pointer;
+  display: block;
+  height: 15px;
+  position: absolute;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  width: 15px;
+  z-index: 1;
+}
+
+.material_checkbox:checked:before
+{
+  border-top-style: none;
+  border-right-style: none;
+  height: 10px;
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.material_checkbox:after
+{
+  background: #fff;
+  content: "";
+  display: block;
+  height: 15px;
+  position: absolute;
+  top: 0;
+  width: 15px;
+  z-index: 0;
+}
+
+.material_checkbox:nth-child(1):checked:before{border-color:#e51c23;}
+.material_checkbox:nth-child(3):checked:before{border-color:#e51c23;}
+.material_checkbox:nth-child(5):checked:before{border-color:#e51c23;}
+.material_checkbox:nth-child(7):checked:before{border-color:#e51c23;}
+.material_checkbox:nth-child(9):checked:before{border-color:#e51c23;}
+.material_checkbox:nth-child(11):checked:before{border-color:#e51c23;}
+.material_checkbox:nth-child(13):checked:before{border-color:#e51c23;}
+.material_checkbox:nth-child(15):checked:before{border-color:#e51c23;}
+.material_checkbox:nth-child(17):checked:before{border-color:#009688;}
+.material_checkbox:nth-child(19):checked:before{border-color:#259b24;}
+.material_checkbox:nth-child(21):checked:before{border-color:#8bc34a;}
+.material_checkbox:nth-child(23):checked:before{border-color:#cddc39;}
+.material_checkbox:nth-child(25):checked:before{border-color:#ffeb3b;}
+.material_checkbox:nth-child(27):checked:before{border-color:#ffc107;}
+.material_checkbox:nth-child(29):checked:before{border-color:#ff9800;}
+.material_checkbox:nth-child(31):checked:before{border-color:#ff5722;}
+.material_checkbox:nth-child(33):checked:before{border-color:#795548;}
+.material_checkbox:nth-child(35):checked:before{border-color:#9e9e9e;}
+.material_checkbox:nth-child(37):checked:before{border-color:#607d8b;}
