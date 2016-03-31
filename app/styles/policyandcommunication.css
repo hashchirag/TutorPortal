@@ -293,7 +293,7 @@ footer {
   width: calc(100% - 50px);
   position: absolute;
   top:0px;
-  left: 0px;
+  left: 10px;
   background: #2DCEB1;
   vertical-align: middle;
   text-align: center;

@@ -21,7 +21,7 @@
 
  		if(isLoggedIn === null){
  			$location.path('/');
- 			$route.reload();
+ 			// $route.reload();
  		}
  	}
  	else {
@@ -233,8 +233,11 @@ $("#submit").click(function(){
 	}
 
 	//SUBMITTING THE FORM
+	canSubmit = true;
 	if(canSubmit){
-		alert("SUBMITTED");
+		// alert("SUBMITTED");
+		$location.path('/'+ 'confirmation');
+		$route.reload();
 	}
 
 
