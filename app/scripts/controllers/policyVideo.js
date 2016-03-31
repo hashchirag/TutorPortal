@@ -12,23 +12,24 @@
  angular.module('angularPortalApp')
  .controller('PolicyCtrl', function ($scope,$location,$route) {
 
- 	// See if logged into fb .If not, redirect to FB Login Page
+// See if logged into fb .If not, redirect to FB Login Page
 
- 	if(typeof(Storage) !== "undefined") {
- 		var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
- 		console.log(isLoggedIn);
 
- 		if(isLoggedIn === null){
- 			$location.path('/'+ 'tologinpage');
- 			$route.reload();
- 		}
- 	}
- 	else {
- 		alert("Use an updated version of the browser to proceed");
- 	}
+if(typeof(Storage) !== "undefined") {
+	var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
+	console.log(isLoggedIn);
 
- 	var $button = document.querySelector('#taketest');
- 	$button.addEventListener('click', function() {
+	if(isLoggedIn === null){
+		$location.path('/'+ 'tologinpage');
+		$route.reload();
+	}
+}
+else {
+	alert("Use an updated version of the browser to proceed");
+}
+
+var $button = document.querySelector('#taketest');
+$button.addEventListener('click', function() {
  		// var duration = 0.3,
  		// delay = 0.08;
  		// TweenMax.to($button, duration, {scaleY: 1.6, ease: Expo.easeOut});
@@ -39,4 +40,4 @@
  		// $location.path('/'+ 'policytest');
  		// $route.reload();
  	});
- });
+});

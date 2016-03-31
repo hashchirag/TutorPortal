@@ -26,6 +26,7 @@
  		})
  		.then(function(response) {
             // success
+            console.log("response is " + response.data);
             //Writing to session data
             if(typeof(Storage) !== "undefined") {
 

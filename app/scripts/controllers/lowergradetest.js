@@ -13,6 +13,22 @@
  angular.module('angularPortalApp')
  .controller('LowergradetestCtrl', function ($scope,$location,$route,$http) {
 
+// See if logged into fb .If not, redirect to FB Login Page
+
+
+if(typeof(Storage) !== "undefined") {
+  var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
+  console.log(isLoggedIn);
+
+  if(isLoggedIn === null){
+    $location.path('/'+ 'tologinpage');
+    $route.reload();
+  }
+}
+else {
+  alert("Use an updated version of the browser to proceed");
+}
+
 // Array of all the questions and choices to populate the questions. This might be saved in some JSON file or a database and we would have to read the data in.
 var all_questions = [];
 var i = 0;

@@ -12,6 +12,22 @@
  angular.module('angularPortalApp')
  .controller('PolicytestCtrl', function ($scope,$location,$route,$http) {
 
+  // See if logged into fb .If not, redirect to FB Login Page
+
+
+  if(typeof(Storage) !== "undefined") {
+    var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
+    console.log(isLoggedIn);
+
+    if(isLoggedIn === null){
+      $location.path('/'+ 'tologinpage');
+      $route.reload();
+    }
+  }
+  else {
+    alert("Use an updated version of the browser to proceed");
+  }
+
   (function($) {
     $.fn.emc = function(options) {
       var countDownTime = 900;

@@ -12,40 +12,44 @@
  angular.module('angularPortalApp')
  .controller('CommunicationtestCtrl', function ($scope,$location,$route,$http) {(function($) {
   $.fn.emc = function(options) {
-    if(typeof(Storage) !== "undefined") {
-      var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
-      console.log(isLoggedIn);
+   
+// See if logged into fb .If not, redirect to FB Login Page
 
-      if(isLoggedIn === null){
-        $location.path('/');
-        $route.reload();
-      }
-    }
-    else {
-      alert("Use an updated version of the browser to proceed");
-    }
 
-    var countDownTime = 1200;
+if(typeof(Storage) !== "undefined") {
+  var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
+  console.log(isLoggedIn);
 
-    var defaults = {
-      key: [],
-      scoring: "normal",
-      progress: true
-    },
-    settings = $.extend(defaults, options),
-    $quizItems = $('[data-quiz-item]'),
-    $choices = $('[data-choices]'),
-    itemCount = $quizItems.length,
-    chosen = [],
-    $option = null,
-    $label = null;
+  if(isLoggedIn === null){
+    $location.path('/'+ 'tologinpage');
+    $route.reload();
+  }
+}
+else {
+  alert("Use an updated version of the browser to proceed");
+}
 
-    var username = "";
-    var jee_test = "";
-    var cookie = "";
-    var count = 0;
+var countDownTime = 1200;
 
-    emcInit();
+var defaults = {
+  key: [],
+  scoring: "normal",
+  progress: true
+},
+settings = $.extend(defaults, options),
+$quizItems = $('[data-quiz-item]'),
+$choices = $('[data-choices]'),
+itemCount = $quizItems.length,
+chosen = [],
+$option = null,
+$label = null;
+
+var username = "";
+var jee_test = "";
+var cookie = "";
+var count = 0;
+
+emcInit();
 
     //Timer part
     function CountDown(container, time) {

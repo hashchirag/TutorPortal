@@ -16,10 +16,26 @@
  angular.module('angularPortalApp')
  .controller('LowergradelandingCtrl', function ($scope,$location,$route,$http) {
 
-  var selected_subjects = [];
+// See if logged into fb .If not, redirect to FB Login Page
 
-  var flipCard = function() {
-    return {
+
+if(typeof(Storage) !== "undefined") {
+  var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
+  console.log(isLoggedIn);
+
+  if(isLoggedIn === null){
+    $location.path('/'+ 'tologinpage');
+    $route.reload();
+  }
+}
+else {
+  alert("Use an updated version of the browser to proceed");
+}
+
+var selected_subjects = [];
+
+var flipCard = function() {
+  return {
     /**
      * Attach desired event handler. Cross browser.
      */

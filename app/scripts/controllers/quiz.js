@@ -17,52 +17,67 @@
 
   app.controller('IitCtrl', ['$scope', '$http', '$sce','$location','$route', function($scope, $http, $sce,$location,$route,$routeProvider) {
 
-
-    if(typeof(Storage) !== "undefined") {
-      var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
-      console.log(isLoggedIn);
-
-      if(isLoggedIn === null){
-        $location.path('/');
-        $route.reload();
-      }
-    }
-    else {
-      alert("Use an updated version of the browser to proceed");
-    }
-
-    $scope.finalScore =[];
-
-    var username = "";
-
-    function getCookie(cname) {
-      var name = cname + "=";
-      var ca = document.cookie.split(';');
-      for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-      }
-      return "";
-    }
-
-    function checkCookie() {
-      cookie = getCookie("values");
+// See if logged into fb .If not, redirect to FB Login Page
 
 
-      if (cookie != "") {
-        var res = cookie.split(",");
-        console.log("Welcome again " + res[0]);
+if(typeof(Storage) !== "undefined") {
+  var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
+  console.log(isLoggedIn);
 
-        console.log(res[0]);
-        console.log(res[1]);
-        username = res[0];
-      } else {
-        alert("Enable cookies and restart");
-      }
-    }
+  if(isLoggedIn === null){
+    $location.path('/'+ 'tologinpage');
+    $route.reload();
+  }
+}
+else {
+  alert("Use an updated version of the browser to proceed");
+}
 
-    alert("Please note that each question can be viewed and anwered only once. Clicking on an answer selects and submits it automatically.");
+if(typeof(Storage) !== "undefined") {
+  var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
+  console.log(isLoggedIn);
+
+  if(isLoggedIn === null){
+    $location.path('/');
+    $route.reload();
+  }
+}
+else {
+  alert("Use an updated version of the browser to proceed");
+}
+
+$scope.finalScore =[];
+
+var username = "";
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1);
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  }
+  return "";
+}
+
+function checkCookie() {
+  cookie = getCookie("values");
+
+
+  if (cookie != "") {
+    var res = cookie.split(",");
+    console.log("Welcome again " + res[0]);
+
+    console.log(res[0]);
+    console.log(res[1]);
+    username = res[0];
+  } else {
+    alert("Enable cookies and restart");
+  }
+}
+
+alert("Please note that each question can be viewed and anwered only once. Clicking on an answer selects and submits it automatically.");
 
     // checkCookie();
 
