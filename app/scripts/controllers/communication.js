@@ -25,7 +25,7 @@
       alert("Use an updated version of the browser to proceed");
     }
 
-    var countDownTime = 5;
+    var countDownTime = 1200;
 
     var defaults = {
       key: [],
@@ -44,54 +44,8 @@
     var jee_test = "";
     var cookie = "";
     var count = 0;
-    // function init() {
-    //   username = getParameterByName('username');
-    //   jee_test = getParameterByName('jee_test');
-    //   console.log(username + jee_test);
-    // }
-    //
-    // function getParameterByName(name, url) {
-    //   if (!url) url = window.location.href;
-    //   name = name.replace(/[\[\]]/g, "\\$&");
-    //   var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-    //     results = regex.exec(url);
-    //   if (!results) return null;
-    //   if (!results[2]) return '';
-    //   return decodeURIComponent(results[2].replace(/\+/g, " "));
-    // }
-
-
 
     emcInit();
-
-    function getCookie(cname) {
-      var name = cname + "=";
-      var ca = document.cookie.split(';');
-      for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-      }
-      return "";
-    }
-
-    function checkCookie() {
-      cookie = getCookie("values");
-
-
-      if (cookie != "") {
-        var res = cookie.split(",");
-        console.log("Welcome again " + res[0]);
-
-        console.log(res[0]);
-        console.log(res[1]);
-        username = res[0];
-      } else {
-        alert("Enable cookies and restart");
-      }
-    }
-
-    // checkCookie();
 
     //Timer part
     function CountDown(container, time) {
@@ -113,6 +67,7 @@
 
     //Case of time ended. Display Results
     if (this.remainingTime == -1) {
+      $('#canvasID').hide();
       scoreNormal();
     }
 
@@ -227,6 +182,8 @@
     if (chosen.length === itemCount) {
       $submit.addClass('ready-show');
       $submit.click(function() {
+        $('#canvasID').hide();
+
         return scoreNormal();
       });
     }
@@ -299,9 +256,9 @@
         //End Post
         count = count + 1;
       }
-      $submit = $('#emc-submit');
+      // var $submit = $('#emc-submit');
 
-      $submit.removeClass('ready-show');
+      $('#emc-submit').removeClass('ready-show');
 
     }
 

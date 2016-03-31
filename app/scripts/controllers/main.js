@@ -32,7 +32,7 @@
             	// sessionStorage.setItem("accessToken", "Smith");
             	sessionStorage.setItem("loggedIntoFB","true");
             	$location.path('/'+ 'details');
-            	$route.reload();
+            	// $route.reload();
 
             } else {
             	alert("No web storage support,try a different browser");

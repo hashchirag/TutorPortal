@@ -19,7 +19,7 @@
  		console.log(isLoggedIn);
 
  		if(isLoggedIn === null){
- 			$location.path('/');
+ 			$location.path('/'+ 'tologinpage');
  			$route.reload();
  		}
  	}
@@ -34,8 +34,9 @@
  		// TweenMax.to($button, duration, {scaleY: 1.6, ease: Expo.easeOut});
  		// TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
  		// TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
- 		alert('async()');
- 		$location.path('/'+ 'policytest');
- 		$route.reload();
+
+ 		window.location="http://localhost:9000/#/policytest";
+ 		// $location.path('/'+ 'policytest');
+ 		// $route.reload();
  	});
  });

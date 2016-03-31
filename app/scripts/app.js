@@ -57,6 +57,14 @@
   .when('/lowergradelanding', {
     templateUrl: 'views/lowergradelandingpage.html',
     controller: 'LowergradelandingCtrl'
+  })
+  .when('/redirecting', {
+    templateUrl: 'views/redirecting.html',
+    controller: 'RedirectingCtrl'
+  })  
+  .when('/tologinpage', {
+    templateUrl: 'views/tologinpage.html',
+    controller: 'TologinpageCtrl'
   })  
   .when('/lowergradetest', {
     templateUrl: 'views/lowergradetest.html',

@@ -15,13 +15,14 @@
 
  	// See if logged into fb .If not, redirect to FB Login Page
 
+
  	if(typeof(Storage) !== "undefined") {
  		var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
  		console.log(isLoggedIn);
 
  		if(isLoggedIn === null){
- 			$location.path('/');
- 			// $route.reload();
+ 			$location.path('/'+ 'tologinpage');
+ 			$route.reload();
  		}
  	}
  	else {
@@ -112,7 +113,7 @@
     var obj = JSON.parse(jsonString);
     var objData = obj.data;
 
-    for (var i=0; i<objData.length; i++){;
+    for (var i=0; i<objData.length; i++){
     	$scope.listOfDegrees[objData[i].name] = objData[i].id;
     }
 
