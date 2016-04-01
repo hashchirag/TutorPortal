@@ -35,6 +35,8 @@ var i = 0;
 var phy_score = 0;
 var che_score = 0;
 var mat_score = 0;
+$scope.currentQuestionIndex = 1;
+$scope.totalNumberOfQuestions;
 
 var mat_questions = [{
   question_string: "Reema's height is 5'2\",Anita is taller than Reema but she is not taller than Pinky.Pinky is shorter than her cousin Rani,but she is not shorter than Reema.Who is the tallest in the group ?",
@@ -343,6 +345,9 @@ Quiz.prototype.render = function(container) {
   $('#prev-question-button').click(function() {
     if (current_question_index > 0) {
       current_question_index--;
+      $scope.currentQuestionIndex = $scope.currentQuestionIndex -1;
+      $('#preview').text('Question Number : ' + $scope.currentQuestionIndex + " / " + $scope.totalNumberOfQuestions);
+
       change_question();
     }
   });
@@ -351,6 +356,8 @@ Quiz.prototype.render = function(container) {
   $('#next-question-button').click(function() {
     if (current_question_index < self.questions.length - 1) {
       current_question_index++;
+      $scope.currentQuestionIndex = $scope.currentQuestionIndex + 1;
+      $('#preview').text('Question Number : ' + $scope.currentQuestionIndex + " / " + $scope.totalNumberOfQuestions);
       change_question();
     }
   });
@@ -542,6 +549,10 @@ $(document).ready(function() {
     all_questions = all_questions.concat(che_questions);
     countDownTime += 600;
   }
+
+  $scope.totalNumberOfQuestions = all_questions.length;
+  $('#preview').text('Question Number : ' + $scope.currentQuestionIndex + " / " + $scope.totalNumberOfQuestions);
+
 
   console.log(all_questions);
 
