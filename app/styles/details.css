@@ -413,3 +413,85 @@ fieldset {
   outline: none;
 }
 
+.js .file {
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(top, #fff, #f1f1f1);
+  background-image: linear-gradient(to bottom, #fff, #f1f1f1);
+  border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 0.25em;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.05);
+  display: block;
+  line-height: 1;
+  overflow: hidden;
+  padding: 0.75em 2em 0.75em 0.75em;
+  position: relative;
+  text-align: center;
+}
+
+.js .file.active .file-label {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.js .file:hover {
+  border-color: #aaa;
+  border-bottom-color: #999
+}
+
+.js .file.focus {
+  border-color: #709AD0;
+  box-shadow: 0 0 0 1px #709AD0, 0 2px 0 1px #ddd;
+}
+
+.js .file.focus::after {
+  border-top-color: #709AD0;
+}
+
+/* hide and overlay when JavaScript is enabled */
+
+.js .file input,
+.js .file input::-webkit-file-upload-button {
+  cursor: pointer;
+}
+
+.js .file input {
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  /* strange input behavior in IE */
+  font-size: 10em;
+}
+
+/* show file value when selected */
+
+.js .file-value {
+  color: #709AD0;
+  display: none;
+}
+
+.js .file-value::before {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjQgMjQiIGhlaWdodD0iMTAwIiB3aWR0aD0iMTAwIj48cGF0aCBmaWxsPSIjNzA5QUQwIiBkPSJNMTQgMkg2Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDEyYzEuMSAwIDItLjkgMi0yVjhsLTYtNnptNC41IDdIMTNWMy41TDE4LjUgOXoiLz48L3N2Zz4NCg==);
+  background-position: center;
+  background-size: 100% auto;
+  content: '';
+  display: inline-block;
+  height: 1.5em;
+  line-height: 0;
+  margin: -0.55em 0.25em -0.45em 0;
+  position: relative;
+  width: 1.5em;
+}
+
+.js .file.active .file-value {
+  display: inline;
+}

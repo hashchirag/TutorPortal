@@ -183,6 +183,54 @@
  	});
 
 
+
+ 	$scope.addImagePickerEvents = function (name){
+	// Image inputs
+	var media = $('#'+ name);
+	if (media.length) {
+		var mediaDefaultValue = $('.file span.value').text();
+		var mediaCharLimit = 20;
+
+		$('.file .bt-value').click(function(){
+			media.click();
+		});
+
+		media.on('change', function() {
+			var value = this.value.replace("C:\\fakepath\\", "");
+			var newValue;
+			var valueExt;
+			var charLimit;
+
+			if (value) {
+				newValue = value;
+				valueExt = value.split('.').reverse()[0];
+				if (newValue.length > mediaCharLimit) {
+					charLimit = mediaCharLimit - valueExt.length;
+
+	                // truncate chars.
+	                newValue = $.trim(value).substring(0, charLimit) + '…';
+
+	                // if file name has extension, add it to newValue.
+	                if (valueExt.length) {
+	                	newValue += valueExt;
+	                }
+	            }
+	        }
+	        else {
+	        	newValue = mediaDefaultValue;
+	        }
+	        $(this).parent().find('span.value').text(newValue);
+	    });
+	}
+}
+$scope.addImagePickerEvents('id_front_student');
+$scope.addImagePickerEvents('id_back_student');
+$scope.addImagePickerEvents('certificate_graduate');
+$scope.addImagePickerEvents('id_graduate');
+
+
+
+
 //FORM SUBMIT BUTTON
 $("#submit").click(function(){
 
