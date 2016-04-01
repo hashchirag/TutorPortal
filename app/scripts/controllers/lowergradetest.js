@@ -289,6 +289,8 @@ var che_questions = [{
 }];
 //CHEMISTRY QUESTIONS END
 
+$('#proceed').hide();
+
 // An object for a Quiz, which will contain Question objects.
 var Quiz = function(quiz_name) {
   // Private fields for an instance of a Quiz object.
@@ -404,6 +406,7 @@ Quiz.prototype.render = function(container) {
     $('#preview').hide();
     question_container.hide();
     $('#quiz-results-message').text(message);
+    $('#proceed').show();
 
     var consolidated_results;
     var mat_score_string = "";
@@ -556,6 +559,10 @@ $(document).ready(function() {
 
 
   console.log(all_questions);
+
+  $('#proceed').click(function(){
+    alert("aSome");
+  });
 
 
   //Timer part
