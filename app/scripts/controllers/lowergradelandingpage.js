@@ -18,7 +18,6 @@
 
 // See if logged into fb .If not, redirect to FB Login Page
 
-
 if(typeof(Storage) !== "undefined") {
   var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
   console.log(isLoggedIn);

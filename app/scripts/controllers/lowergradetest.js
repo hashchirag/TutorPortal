@@ -392,15 +392,16 @@ Quiz.prototype.render = function(container) {
     var percentage = score / self.questions.length;
     console.log(percentage);
     var message;
-    if (percentage === 1) {
-      message = 'Great job!'
-    } else if (percentage >= .75) {
-      message = 'You did alright.'
-    } else if (percentage >= .5) {
-      message = 'Better luck next time.'
-    } else {
-      message = 'Maybe you should try a little harder.'
-    }
+    // if (percentage === 1) {
+    //   message = 'Great job!'
+    // } else if (percentage >= .75) {
+    //   message = 'You did alright.'
+    // } else if (percentage >= .5) {
+    //   message = 'Better luck next time.'
+    // } else {
+    //   message = 'Maybe you should try a little harder.'
+    // }
+    $('#preview').hide();
     question_container.hide();
     $('#quiz-results-message').text(message);
 

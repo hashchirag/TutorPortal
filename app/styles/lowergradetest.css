@@ -128,7 +128,10 @@ body {
   font-weight: bold;
 }
 #quiz-results-score {
-  display: block;
+
+  position: absolute;
+  top : 40%;
+  left : 40%;
   color: #ffffff;
   font-size: 20px;
 }
