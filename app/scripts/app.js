@@ -65,7 +65,15 @@
   .when('/tologinpage', {
     templateUrl: 'views/tologinpage.html',
     controller: 'TologinpageCtrl'
+  })
+  .when('/toexamdashboard', {
+    templateUrl: 'views/toexamdashboard.html',
+    controller: 'ToexamdashboardCtrl'
   })  
+  .when('/examdashboard', {
+    templateUrl: 'views/examdashboard.html',
+    controller: 'examdashboardCtrl'
+  })    
   .when('/lowergradetest', {
     templateUrl: 'views/lowergradetest.html',
     controller: 'LowergradetestCtrl'
