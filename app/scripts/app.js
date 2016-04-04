@@ -73,7 +73,11 @@
   .when('/examdashboard', {
     templateUrl: 'views/examdashboard.html',
     controller: 'examdashboardCtrl'
-  })    
+  })  
+  .when('/todetailspage', {
+    templateUrl: 'views/todetailspage.html',
+    controller: 'todetailspageCtrl'
+  })  
   .when('/lowergradetest', {
     templateUrl: 'views/lowergradetest.html',
     controller: 'LowergradetestCtrl'

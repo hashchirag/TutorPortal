@@ -1,7 +1,5 @@
- angular.module('angularPortalApp')
- .controller('ToexamdashboardCtrl', function ($scope,$location,$route,$http) {
- 	// window.location="http://localhost:9000";
-
- 	$location.path('/'+ 'examdashboard');
- 	$route.reload();
- });
+angular.module('angularPortalApp')
+.controller('ToexamdashboardCtrl', function ($scope,$location,$route,$http) {
+	$location.path('/'+ 'examdashboard');
+	$route.reload();
+});

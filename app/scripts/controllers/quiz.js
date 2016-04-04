@@ -501,8 +501,11 @@ alert("Please note that each question can be viewed and anwered only once. Click
 
     }
     
+
     $scope.redirect= function(){
-      window.location =  "http://now.hashlearn.com/users/dashboard/";
+      // window.location =  "http://now.hashlearn.com/users/dashboard/";
+      $location.path('/'+ 'toexamdashboard');
+      $route.reload();
     }
 
 

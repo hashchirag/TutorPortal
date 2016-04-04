@@ -35,7 +35,7 @@
  	});
 
  	$('#exams input').on('change', function() {
- 		alert($('input[name=exam]:checked', '#exams').val()); 
+ 		//Listen to change in radio buttons
  	});
 
  });

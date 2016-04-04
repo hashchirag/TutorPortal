@@ -223,7 +223,7 @@ emcInit();
     else{
       $scoreEl.html("You scored a " + score + "<br />" + "<a class = 'next'>Take the communication Test</a>").addClass('new-score');
       $scoreEl.click(function(){
-        $location.path('/'+ 'iittest');
+        $location.path('/'+ 'toexamdashboard');
         $route.reload();
       });
     }
