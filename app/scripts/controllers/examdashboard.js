@@ -12,6 +12,19 @@
  angular.module('angularPortalApp')
  .controller('examdashboardCtrl', function ($scope,$location,$route,$http) {
 
+ 	if(typeof(Storage) !== "undefined") {
+ 		var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
+ 		console.log(isLoggedIn);
+
+ 		if(isLoggedIn === null){
+ 			$location.path('/'+ 'tologinpage');
+ 			$route.reload();
+ 		}
+ 	}
+ 	else {
+ 		alert("Use an updated version of the browser to proceed");
+ 	}
+
  	var arr = ["asdasd","bbob","gjdlfsdf","rfspa"];
 
  	for (var i=0;i<arr.length;i++)
