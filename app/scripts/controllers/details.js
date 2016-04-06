@@ -124,7 +124,7 @@
      	//POPULATING COLLEGE DROP DOWN
 
      	for(var nameOfLanguage in $scope.listOfLanguages){
-     		$scope.addCheckbox('#languages', nameOfLanguage, "exam");
+     		$scope.addCheckbox('#languages', nameOfLanguage, "language");
      	}
      }, function errorCallback(response) {
     // called asynchronously if an error occurs
@@ -313,7 +313,7 @@ $("#submit").click(function(){
 	}
 
 	//SUBMITTING THE FORM
-	canSubmit = true;
+	// canSubmit = true;
 	if(canSubmit){
 		// alert("SUBMITTED");
 		$location.path('/'+ 'confirmation');

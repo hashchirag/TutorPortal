@@ -24,6 +24,11 @@ body *::before {
   box-sizing: border-box;
 }
 
+p{
+  font-family: 'Roboto', sans-serif;
+
+}
+
 body {
   background-image: -webkit-linear-gradient(top, #f2f2f2, #e6e6e6);
   background-image: linear-gradient(top, #f2f2f2, #e6e6e6);
@@ -447,10 +452,10 @@ fieldset {
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,.4);
-  margin: 50px;
   width: 500px;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .material_checkbox
