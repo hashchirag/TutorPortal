@@ -249,7 +249,7 @@
         // var url = "http://now.hashlearn.com:80/api/users/tutor/testResult/";
         // // var params = "lorem=ipsum&name=binny";
         // var correct = (itemCount - wrong.length);
-        // var params = "username=" + username + "&questions_attempted=15&questions_correct=" + correct + "&test_type=policy";
+        // var params = "email=" + username + "&questions_attempted=15&questions_correct=" + correct + "&test_type=policy";
         // console.log("Parameters are - username=" + username + "&questions_attempted=15&questions_correct=" + correct + "&test_type=policy");
 
         // http.open("POST", url, true);

@@ -27,7 +27,7 @@
  		.then(function(response) {
             // success
             console.log("State is " + response.data.state);
-            console.log("State is " + response.data.email);
+            console.log("email id is " + response.data.email); 
 
             //Writing to session data
             if(typeof(Storage) !== "undefined") {
@@ -36,18 +36,61 @@
             	sessionStorage.setItem("loggedIntoFB","true");
             	sessionStorage.setItem("email",response.data.email);
 
-            	switch(response.data.email){
-            		case 0:
-            			break;
+            	
+                // See which page to redirect to, based on the STATE
+                switch(response.data.state){
+                  case 0:
+                        //Setting state to USER CREATE (1)
+                        var http = new XMLHttpRequest();
+                        var url = "http://staging-now.hashlearn.com/api/users/tutor/set-status/";
+                        var params = "email=" + response.data.email+"&state=1";
+                        http.open("POST", url, true);
 
-            			case 1: 
-            			break;
-            			
-            			case 2:	
-            			break;
-            		}
+                        //Send the proper header information along with the request
+                        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-            		$location.path('/'+ 'details');
+                        http.onreadystatechange = function() {//Call a function when the state changes.
+                            if(http.readyState == 4 && http.status == 200) {
+                                alert(http.responseText);
+                            }
+                        }
+                        http.send(params); 
+                        $location.path('/'+ 'details');
+                        $route.reload();
+
+                        break;
+
+                        case 1:
+                            $location.path('/'+ 'details');
+                            break;
+
+                            case 2:
+                                $location.path('/'+ 'policy');
+                                $route.reload();
+                                break;
+
+                                case 3:
+                                    $location.path('/'+ 'communcation');
+                                    $route.reload();
+
+                                    break;       
+
+                                    case 4:
+                                        $location.path('/'+ 'sorry');
+                                        $route.reload();
+                                        break;
+
+                                        case 5:
+                                            $location.path('/'+ 'sorry');
+                                            $route.reload();
+                                            break;
+
+                                            case 6:
+                                                $location.path('/'+ 'examdashboard');
+                                                $route.reload();
+                                                break;
+                                            }
+
             	// $route.reload();
 
             } else {

@@ -16,18 +16,36 @@
  	// See if logged into fb .If not, redirect to FB Login Page
 
 
- 	// if(typeof(Storage) !== "undefined") {
- 	// 	var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
- 	// 	console.log(isLoggedIn);
+ 	if(typeof(Storage) !== "undefined") {
+ 		var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
+ 		console.log(isLoggedIn);
 
- 	// 	if(isLoggedIn === null){
- 	// 		$location.path('/'+ 'tologinpage');
- 	// 		$route.reload();
- 	// 	}
- 	// }
- 	// else {
- 	// 	alert("Use an updated version of the browser to proceed");
- 	// }
+ 		if(isLoggedIn === null){
+ 			$location.path('/'+ 'tologinpage');
+ 			$route.reload();
+ 		}
+ 	}
+ 	else {
+ 		alert("Use an updated version of the browser to proceed");
+ 	}
+
+
+ 	//Get the state of the user, if not 1, Redirect to FB Login Page.
+ 	$.ajax({
+ 		async: false,
+ 		type: 'GET',
+ 		url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
+ 		success: function(data) {
+          //callback
+          console.log("Current state is " + data.state);
+
+          if(data.state !=1){
+          	$location.path('/'+ 'tologinpage');
+          	$route.reload();
+          }
+      }
+  });
+
 
 
  	$scope.listOfColleges = [];
@@ -314,6 +332,22 @@ $("#submit").click(function(){
 		alert(selectedExamIdsString);
 		$scope.postExams($scope,selectedExamIdsString);
 
+		//Setting state to USER CREATE (2)
+
+		var http = new XMLHttpRequest();
+		var url = "http://staging-now.hashlearn.com/api/users/tutor/set-status/";
+		var params = "email=" + sessionStorage.getItem("email")+"&state=2";
+		http.open("POST", url, true);
+
+            //Send the proper header information along with the request
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            http.onreadystatechange = function() {//Call a function when the state changes.
+            	if(http.readyState == 4 && http.status == 200) {
+            		alert(http.responseText);
+            	}
+            }
+            http.send(params);
 
 		// $location.path('/'+ 'policy');
 		// $route.reload();

@@ -27,28 +27,6 @@
 
  	$scope.listOfExams = [];
 
- 	// $.get("http://staging-now.hashlearn.com/api/users/tutor/get-exams/?email="+sessionStorage.getItem("email"), function(data, status){
- 	// 	var jsonString = JSON.stringify(data);
- 	// 	console.log(jsonString);
-
-
- 	// 	var obj = JSON.parse(jsonString);
- 	// 	console.log(obj);
- 	// 	// var objData = obj.data;
-
- 	// 	for (var i=0; i<obj.length; i++){
- 	// 		$scope.listOfExams[obj[i].name] = obj[i].id;
- 	// 	}
- 	// 	console.log($scope.listOfExams);
-
- 	// 	for (var i=0;i<$scope.listOfExams.length;i++)
- 	// 	{
- 	// 		$("#exams").append("<input id='r" + i + "'type='radio' name='exam' value='" + $scope.listOfExams[i] +"'><label for='r" + i + "'><i></i>" + $scope.listOfExams[i] + "</label>");
- 	// 		console.log($scope.listOfExams[i]);
-
- 	// 	}
-
- 	// });
  	$.ajax({
  		async: false,
  		type: 'GET',
@@ -65,8 +43,8 @@
           	$scope.listOfExams[obj[i].name] = obj[i].id;
           	$("#exams").append("<input id='r" + i + "'type='radio' name='exam' value='" + obj[i].name +"'><label for='r" + i + "'><i></i>" + obj[i].name + "</label>");
           }
-      }
-  });
+        }
+      });
 
 
  	// var arr = ["asdasd","bbob","gjdlfsdf","rfspa"];
