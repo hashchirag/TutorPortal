@@ -333,18 +333,16 @@ $scope.postExams= function ($scope,selectedExamIdsString) {
 	var params = "email=" + sessionStorage.getItem("email")+"&exams="+selectedExamIdsString;
 	http.open("POST", url, true);
 
-//Send the proper header information along with the request
-http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	//Send the proper header information along with the request
+	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-http.onreadystatechange = function() {//Call a function when the state changes.
-	if(http.readyState == 4 && http.status == 200) {
-		alert(http.responseText);
+	http.onreadystatechange = function() {//Call a function when the state changes.
+		if(http.readyState == 4 && http.status == 200) {
+			alert(http.responseText);
+		}
 	}
-}
-http.send(params);	
-	// xhttp.open("POST", "http://staging-now.hashlearn.com/api/users/tutor/register-exams/", true);
-	// xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	// xhttp.send("email=chiragshenoy@gmail.com&exams=9");
+	http.send(params);	
+
 
 }
 //END OF POST EXAM DATA
