@@ -26,13 +26,28 @@
  		})
  		.then(function(response) {
             // success
-            console.log("response is " + response.data);
+            console.log("State is " + response.data.state);
+            console.log("State is " + response.data.email);
+
             //Writing to session data
             if(typeof(Storage) !== "undefined") {
 
             	// sessionStorage.setItem("accessToken", "Smith");
             	sessionStorage.setItem("loggedIntoFB","true");
-            	$location.path('/'+ 'details');
+            	sessionStorage.setItem("email",response.data.email);
+
+            	switch(response.data.email){
+            		case 0:
+            			break;
+
+            			case 1: 
+            			break;
+            			
+            			case 2:	
+            			break;
+            		}
+
+            		$location.path('/'+ 'details');
             	// $route.reload();
 
             } else {

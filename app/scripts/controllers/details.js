@@ -59,8 +59,6 @@
     	$scope.listOfColleges[objData[i].name] = objData[i].id;
     }
 
-    console.log($scope.listOfColleges);
-
      	//POPULATING COLLEGE DROP DOWN
      	$scope.addOptionToDropDown("college", "Other");
 
@@ -89,8 +87,6 @@
     	$scope.listOfExams[objData[i].name] = objData[i].id;
     }
 
-    console.log($scope.listOfExams);
-
      	//POPULATING COLLEGE DROP DOWN
 
      	for(var nameOfCollege in $scope.listOfExams){
@@ -118,8 +114,6 @@
     for (var i=0; i<objData.length; i++){;
     	$scope.listOfLanguages[objData[i].name] = objData[i].id;
     }
-
-    console.log($scope.listOfExams);
 
      	//POPULATING COLLEGE DROP DOWN
 
@@ -181,24 +175,12 @@
 
 
 	$scope.graduationYears= ["1950","1951","1952","1953","1954","1955","1956","1957","1958","1959","1960","1961","1962","1963","1964","1965","1966","1967","1968","1969","1970","1971","1971","1972","1973","1974","1975","1976","1977","1978","1979","1980","1981","1982","1983","1984","1985","1986","1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"];
-
-
- 	//POPULATING EXAM GROUPS CHECK BOXES
-
- 	// for(var i =0 ; i < $scope.array1.length ; i ++ ){
- 	// 	$scope.addCheckbox('#examGroups',$scope.array1[i],"exam");
- 	// }
-
  	//POPULATING GRADUATION YEAR DROP DOWN
 
  	for(var i =0 ; i < $scope.graduationYears.length ; i ++ ){
  		$scope.addOptionToDropDown("year", ($scope.graduationYears[i]));
  	}
 
- 	//POPULATING LANGUAGE CHECK BOXES
- 	// for(var i =0 ; i < $scope.array1.length ; i ++ ){
- 	// 	$scope.addCheckbox('#languages',$scope.array1[i],"language");
- 	// }
 
  	// HIDE AND DISPLAY PICTURE UPLOADING SECTIONS
  	$('#mForm input').on('change', function() {
@@ -267,8 +249,19 @@ $("#submit").click(function(){
 
 	var canSubmit=true;
 
-	var selectedExamGroups = $scope.getListOfExamGroups();
-	console.log(selectedExamGroups);
+	var selectedExams = $scope.getListOfExams();
+
+	var selectedExamIds = [];
+
+	for(var i = 0 ; i < selectedExams.length ; i++){
+		selectedExamIds[i] = $scope.listOfExams[selectedExams[i]];
+	}
+	var selectedExamIdsString = selectedExamIds.join(',');
+
+
+	console.log(selectedExamIds);
+
+
 
 	var selectedLangs = $scope.getListOfLanguages();
 	console.log(selectedLangs);
@@ -287,7 +280,7 @@ $("#submit").click(function(){
 		canSubmit=false;		
 	}
 
-	if(selectedExamGroups.length == 0){
+	if(selectedExams.length == 0){
 		alert('Choose atleast one exam');
 		canSubmit = false;
 	}
@@ -313,16 +306,58 @@ $("#submit").click(function(){
 	}
 
 	//SUBMITTING THE FORM
-	// canSubmit = true;
+
+
+	canSubmit = true;
 	if(canSubmit){
 		// alert("SUBMITTED");
-		$location.path('/'+ 'confirmation');
-		$route.reload();
+		alert(selectedExamIdsString);
+		$scope.postExams($scope,selectedExamIdsString);
+
+
+		// $location.path('/'+ 'policy');
+		// $route.reload();
 	}
 
 
 
 }); 
+
+
+//POST EXAM DATA - 
+$scope.postExams= function ($scope,selectedExamIdsString) {
+	
+
+	var http = new XMLHttpRequest();
+	var url = "http://staging-now.hashlearn.com/api/users/tutor/register-exams/";
+	var params = "email=" + sessionStorage.getItem("email")+"&exams="+selectedExamIdsString;
+	http.open("POST", url, true);
+
+//Send the proper header information along with the request
+http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+http.onreadystatechange = function() {//Call a function when the state changes.
+	if(http.readyState == 4 && http.status == 200) {
+		alert(http.responseText);
+	}
+}
+http.send(params);	
+	// xhttp.open("POST", "http://staging-now.hashlearn.com/api/users/tutor/register-exams/", true);
+	// xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	// xhttp.send("email=chiragshenoy@gmail.com&exams=9");
+
+}
+//END OF POST EXAM DATA
+
+$scope.getSelectedExamIds = function(selectedExams){
+
+	var selectedExamIds =[];
+	for(var i =0 ; i < selectedExams.length;i++){
+
+	}
+
+}
+
 
 $scope.checkNumberField = function(){
 	var phone = $('#phone').val(),
@@ -362,7 +397,7 @@ $scope.checkEmailField = function(){
 
 }
 
-$scope.getListOfExamGroups = function(){
+$scope.getListOfExams = function(){
 	var selected = [];
 	$("input[name='exam']:checked").each(function() {
 		selected.push($(this).val());
