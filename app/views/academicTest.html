@@ -28,7 +28,7 @@
   <div id="myQuiz" ng-controller="IitCtrl">
     <div class="intro {{ (activeQuestion) > -1 ? 'inactive' : 'active'}}">
       <h2>Tutor Onbard Assessment - Subject Test</h2>
-      <h3>Choose any 5 topics and click on the button below to start the test</h3>
+      <h3>Choose any 5 to 10 topics and click on the button below to start the test</h3>
       <div class="btn" ng-click="startQuiz(selected.length)">Start Test</div>
     </div>
     <canvas id="mycanvas" width="250" height="250"></canvas>
@@ -120,6 +120,36 @@
         </div> -->
       </div>
       <!-- End of Chemistry -->
+
+      <!-- BIOLOGY -->
+
+      <div class="bio {{ (activeQuestion) > -1 ? 'inactive' : 'active'}}" layout="row" layout-wrap>
+        <div flex="100" flex-gt-sm="100" layout="column">
+          <div></div>
+        </div>
+        <div flex="100" flex-gt-sm="50" layout="column">
+          <div >
+            <fieldset class="standard">
+              <legend>BIOLOGY
+              </legend>
+              <div layout="row" layout-wrap flex>
+                <div ng-repeat="chemItem in chemList" class="standard" flex="100">
+                  <label>
+                    <md-checkbox ng-model="data.cb1" ng-checked="exists(chemItem , selected)" ng-click="toggle(chemItem, selected)"/>
+                    {{ chemItem.info.ct}}
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <!-- <div flex="100">
+          <h2 class="md-title">Selected Items</h2>
+          <code style="display: block; padding: 8px;">{{selected | json}}</code>
+        </div> -->
+      </div>
+      <!-- End of BIOLOGY -->
+
 
       <div class="question
       {{ ($index === activeQuestion) ? 'active' : 'inactive' }}

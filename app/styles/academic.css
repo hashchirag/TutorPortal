@@ -22,34 +22,43 @@ header {
   font-size: 16px;
   font-weight: 400;
   color: #33444444;
-  width: 1200px;
-  height: 1300px;
+  width: 1800px;
+  height: 1800px;
   background: #000 url(../images/bg.png);
 }
 #myQuiz .topicSelector {
   left: 20px;
 }
 #myQuiz .maths {
-  width: 800px;
+  width: 600px;
   font-family: 'Raleway';
   position: absolute;
   left: 40px;
   top: 250px;
 }
 #myQuiz .physics {
-  width: 800px;
+  width: 600px;
   font-family: 'Raleway';
   position: absolute;
   left: 450px;
   top: 250px;
 }
 #myQuiz .chem {
-  width: 800px;
+  width: 600px;
   font-family: 'Raleway';
   position: absolute;
   left: 860px;
   top: 250px;
 }
+
+#myQuiz .bio {
+  width: 600px;
+  font-family: 'Raleway';
+  position: absolute;
+  left: 1270px;
+  top: 250px;
+}
+
 #myQuiz .btn {
   display: inline-block;
   cursor: pointer;
@@ -232,13 +241,19 @@ header {
   }
   #myQuiz .physics.active {
     top: 300px;
-    left: 450px;
+    left: 350px;
   }
   #myQuiz .chem.active {
     top: 300px;
-    left: 860px;
+    left: 660px;
   }
-  #myQuiz .maths.inactive, #myQuiz .physics.inactive, #myQuiz .chem.inactive, #myQuiz.inactive.unanswered {
+
+  #myQuiz .bio.active {
+    top: 300px;
+    left: 970px;
+  }
+
+  #myQuiz .maths.inactive, #myQuiz .physics.inactive, #myQuiz .chem.inactive, , #myQuiz .bio.inactive,#myQuiz.inactive.unanswered {
     left: -1800px;
   }
   .checkboxdemoSyncing .checkboxDemo1 div {
