@@ -201,7 +201,7 @@
 
 
  	// HIDE AND DISPLAY PICTURE UPLOADING SECTIONS
- 	$('#mForm input').on('change', function() {
+ 	$('#mForm input:radio').on('change', function() {
  		if (($('input[name="studentOrGraduate"]:checked', '#mForm').val()) == 'student')
  		{
  			$('#graduatePics').hide();
