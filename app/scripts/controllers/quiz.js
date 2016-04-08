@@ -573,9 +573,9 @@ alert("Please note that each question can be viewed and anwered only once. Click
     $scope.uploadResultsToServer = function(catId, scoreScored) {
       //Post
       var http = new XMLHttpRequest();
-      var url = "http://now.hashlearn.com:80/api/users/tutor/topicTestResult/";
+      var url = "http://staging-now.hashlearn.com/api/users/tutor/topic-test-result/";
       // var params = "lorem=ipsum&name=binny";
-      var params = "username=" + username + "&questions_attempted=3&questions_correct=" + scoreScored + "&test_type=jee" + "&chapter_id=" + catId;
+      var params = "email=" + username + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId;
       // console.log("Parameters are  - username=" + username + "&questions_attempted=15&questions_correct=" + scoreScored + "&test_type=policy");
 
       http.open("POST", url, true);

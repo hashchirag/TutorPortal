@@ -31,27 +31,27 @@
 
 
  	//Get the state of the user, if not 1, Redirect to FB Login Page.
- 	$.ajax({
- 		async: false,
- 		type: 'GET',
- 		url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
- 		success: function(data) {
-          //callback
-          console.log("Current state is " + data.state);
+ 	// $.ajax({
+ 	// 	async: false,
+ 	// 	type: 'GET',
+ 	// 	url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
+ 	// 	success: function(data) {
+  //         //callback
+  //         console.log("Current state is " + data.state);
 
-          if(data.state !=1){
-          	$location.path('/'+ 'tologinpage');
-          	$route.reload();
-          }
-      }
-  });
+  //         if(data.state !=1){
+  //         	$location.path('/'+ 'tologinpage');
+  //         	$route.reload();
+  //         }
+  //     }
+  // });
 
 
 
- 	$scope.listOfColleges = [];
- 	$scope.listOfDegrees = [];
- 	$scope.listOfExams = [];
- 	$scope.listOfLanguages =[];
+  $scope.listOfColleges = [];
+  $scope.listOfDegrees = [];
+  $scope.listOfExams = [];
+  $scope.listOfLanguages =[];
 
 
 	//HIDE
@@ -86,7 +86,7 @@
      }, function errorCallback(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.
-    alert("An error has occured. Please contact HashLearn Now");
+    // alert("An error has occured. Please contact HashLearn Now");
 });
 
  	//GETTING LIST OF EXAMS
@@ -270,25 +270,37 @@ $("#submit").click(function(){
 	var selectedExams = $scope.getListOfExams();
 
 	var selectedExamIds = [];
+	var selectedLangsIds = []
 
+
+	//Getting string form exams
 	for(var i = 0 ; i < selectedExams.length ; i++){
 		selectedExamIds[i] = $scope.listOfExams[selectedExams[i]];
 	}
 	var selectedExamIdsString = selectedExamIds.join(',');
 
 
-	console.log(selectedExamIds);
-
-
 
 	var selectedLangs = $scope.getListOfLanguages();
-	console.log(selectedLangs);
+
+	//Getting string form exams
+	for(var i = 0 ; i < selectedLangs.length ; i++){
+		selectedLangsIds[i] = $scope.listOfLanguages[selectedExams[i]];
+	}
+	var selectedLangsIdsString = selectedLangsIds.join(',');
+
 
 	var selectedCollege = $scope.listOfColleges[$scope.getCollegeName()];
-	console.log(selectedCollege);
+
 
 	var selectedDegree = $scope.listOfDegrees[$scope.getDegreeName()];
-	console.log(selectedDegree);
+
+	var alternative_college_name  = $('#customCollegeText').val();
+	var alternative_degree_name  = $('#customDegreeText').val();
+
+	console.log(alternative_college_name);
+	console.log(alternative_degree_name);
+
 
 
 	var selectedGraduationYear = $scope.getGraduationYear();
@@ -332,8 +344,20 @@ $("#submit").click(function(){
 		alert(selectedExamIdsString);
 		$scope.postExams($scope,selectedExamIdsString);
 
-		//Setting state to USER CREATE (2)
+		console.log("Email is " + $('#email').val() );
+		console.log("Phone number is " + $('#phone').val() );
 
+		console.log("selected college is " + selectedCollege);
+		console.log("selected degree is " + selectedDegree);
+		console.log("selected graduation year is " + selectedGraduationYear);
+
+		console.log("selected exam ids string is"+selectedExamIdsString);
+
+		console.log("selected lang ids string is"+selectedLangsIdsString);
+
+
+
+		//Setting state to USER CREATE (2)
 		var http = new XMLHttpRequest();
 		var url = "http://staging-now.hashlearn.com/api/users/tutor/set-status/";
 		var params = "email=" + sessionStorage.getItem("email")+"&state=2";
@@ -454,6 +478,7 @@ $("#college").change(function (){
 	}
 	else{
 		$('#customCollege').hide();
+		$('#customCollegeText').val('');
 	}
 });
 
@@ -463,6 +488,7 @@ $("#degree").change(function (){
 	}
 	else{
 		$('#customDegree').hide();
+		$('#customDegreeText').val('');
 	}
 });
 
