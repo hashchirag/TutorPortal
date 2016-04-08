@@ -253,7 +253,7 @@ header {
     left: 970px;
   }
 
-  #myQuiz .maths.inactive, #myQuiz .physics.inactive, #myQuiz .chem.inactive, , #myQuiz .bio.inactive,#myQuiz.inactive.unanswered {
+  #myQuiz .maths.inactive, #myQuiz .physics.inactive, #myQuiz .chem.inactive, #myQuiz .bio.inactive, #myQuiz.inactive.unanswered {
     left: -1800px;
   }
   .checkboxdemoSyncing .checkboxDemo1 div {

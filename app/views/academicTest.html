@@ -130,13 +130,13 @@
         <div flex="100" flex-gt-sm="50" layout="column">
           <div >
             <fieldset class="standard">
-              <legend>BIOLOGY
+              <legend>Biology
               </legend>
               <div layout="row" layout-wrap flex>
-                <div ng-repeat="chemItem in chemList" class="standard" flex="100">
+                <div ng-repeat="bioItem in bioList" class="standard" flex="100">
                   <label>
-                    <md-checkbox ng-model="data.cb1" ng-checked="exists(chemItem , selected)" ng-click="toggle(chemItem, selected)"/>
-                    {{ chemItem.info.ct}}
+                    <md-checkbox ng-model="data.cb1" ng-checked="exists(bioItem , selected)" ng-click="toggle(bioItem, selected)"/>
+                    {{ bioItem.info.ct}}
                   </label>
                 </div>
               </div>

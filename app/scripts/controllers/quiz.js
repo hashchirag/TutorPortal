@@ -129,7 +129,7 @@ alert("Please note that each question can be viewed and anwered only once. Click
     147,
     149,
     130,
-    270
+    270,150,151,152,153,154,155,156,157,158,159,220,221,221
     ]
 
     $scope.finalArray = ["Limit, Continuity and Differentiability", "Sets, Relations and Functions", "Complex Numbers",
@@ -187,7 +187,20 @@ alert("Please note that each question can be viewed and anwered only once. Click
     "Biomolecules",
     "Practical Chemistry",
     "Chemical Kinetics",
-    "Oxygen: Aldehydes, Ketones and Carboxylic Acids"
+    "Oxygen: Aldehydes, Ketones and Carboxylic Acids",
+    "Diversity in Living World",
+    "Structural Organisation in Animals and Plants",
+    "Cell Structure and Formation",
+    "Plant Physiology",
+    "Human Physiology",
+    "Reproduction",
+    "Genetics and Evolution",
+    "Biology in Human Welfare",
+    "Biotechnology and its Applications",
+    "Ecology and Environment",
+    "Human Health and Disease",
+    "Strategies for Enhancement in Food Production",
+    "Microbes in Humal Welfare"
     ];
 
 
@@ -362,6 +375,23 @@ alert("Please note that each question can be viewed and anwered only once. Click
     $scope.exists = function(item, list) {
       return list.indexOf(item.info.cid) > -1;
     };
+
+    //Loading BIO List Items
+    $http.get('cat-bio.json').then(function(mathData) {
+
+      $scope.bioList = mathData.data;
+      $scope.bioListLength = $scope.bioList.length;
+    });
+
+    $scope.toggle = function(item, list) {
+      var idx = list.indexOf(item.info.cid);
+      if (idx > -1) list.splice(idx, 1);
+      else list.push(item.info.cid);
+    };
+    $scope.exists = function(item, list) {
+      return list.indexOf(item.info.cid) > -1;
+    };
+
 
     //Loading Physics List Items
     $http.get('cat-phy.json').then(function(physicsData) {
