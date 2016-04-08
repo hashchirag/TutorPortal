@@ -28,6 +28,21 @@
     alert("Use an updated version of the browser to proceed");
   }
 
+  $.ajax({
+    async: false,
+    type: 'GET',
+    url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
+    success: function(data) {
+          //callback
+          console.log("Current state is " + data.state);
+
+          if(data.state !=2){
+            $location.path('/'+ 'tologinpage');
+            $route.reload();
+          }
+        }
+      });
+
   (function($) {
     $.fn.emc = function(options) {
       var countDownTime = 900;
@@ -218,54 +233,92 @@
     score = ((itemCount - wrong.length) / itemCount).toFixed(2) * 100 + "%";
     console.log(score);
 
-      //More than 5 wrong
+      //More than 5 wrong - Case of failure
       if( wrong.length >= 5 ){
-        $scoreEl.html("You scored a " + score + "<br />" + "<a class = 'next'>Proceed</a>").addClass('new-score');
-        $scoreEl.click(function(){
 
-          $location.path('/'+ 'sorry');
-          $route.reload();
-        });
-      }
-      else{
-        $scoreEl.html("You scored a " + score + "<br />" + "<a class = 'next'>Take the communication Test</a>").addClass('new-score');
-        $scoreEl.click(function(){
+          //Setting state to POLICY_FAILED (4)
+          var http = new XMLHttpRequest();
+          var url = "http://staging-now.hashlearn.com/api/users/tutor/set-status/";
+          var params = "email=" + sessionStorage.getItem('email')+"&state=4";
+          http.open("POST", url, true);
+
+          //Send the proper header information along with the request
+          http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+          http.onreadystatechange = function() {//Call a function when the state changes.
+            if(http.readyState == 4 && http.status == 200) {
+              alert(http.responseText);
+            }
+          }
+          http.send(params); 
+
+          $scoreEl.html("You scored a " + score + "<br />" + "<a class = 'next'>Proceed</a>").addClass('new-score');
+          $scoreEl.click(function(){
+
+            $location.path('/'+ 'sorry');
+            $route.reload();
+
+          });
+        }
+
+        //Case of pass
+        else{
+
+          //Setting state to POLICY_FAILED (4)
+          var http = new XMLHttpRequest();
+          var url = "http://staging-now.hashlearn.com/api/users/tutor/set-status/";
+          var params = "email=" + sessionStorage.getItem('email')+"&state=3";
+          http.open("POST", url, true);
+
+          //Send the proper header information along with the request
+          http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+          http.onreadystatechange = function() {//Call a function when the state changes.
+            if(http.readyState == 4 && http.status == 200) {
+              alert(http.responseText);
+            }
+          }
+          http.send(params); 
+
+
+          $scoreEl.html("You scored a " + score + "<br />" + "<a class = 'next'>Take the communication Test</a>").addClass('new-score');
+          $scoreEl.click(function(){
           // window.location="http://localhost:9000/#/communicationtest";
           $location.path('/'+ 'redirecting');
           $route.reload();
           // window.location="http://localhost:9000/#/communicationtest";
 
         });
-      }
+        }
 
-      $('html,body').animate({
-        scrollTop: 0
-      }, 50);
+        $('html,body').animate({
+          scrollTop: 0
+        }, 50);
 
 
       //Post
       if (count == 0) {
-        // var http = new XMLHttpRequest();
-        // var url = "http://now.hashlearn.com:80/api/users/tutor/testResult/";
-        // // var params = "lorem=ipsum&name=binny";
-        // var correct = (itemCount - wrong.length);
-        // var params = "email=" + username + "&questions_attempted=15&questions_correct=" + correct + "&test_type=policy";
-        // console.log("Parameters are - username=" + username + "&questions_attempted=15&questions_correct=" + correct + "&test_type=policy");
+        var http = new XMLHttpRequest();
+        var url = "http://staging-now.hashlearn.com/api/users/tutor/test-result/";
+        var correct = (itemCount - wrong.length);
+        var params = "email=" + sessionStorage.getItem("email") + "&questions_attempted=15&questions_correct=" + correct + "&test_type=policy";
+        console.log("Parameters are - username=" + sessionStorage.getItem("email") + "&questions_attempted=15&questions_correct=" + correct + "&test_type=policy");
 
-        // http.open("POST", url, true);
+        http.open("POST", url, true);
 
-        // //Send the proper header information along with the request
-        // http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        // // http.setRequestHeader("Content-length", params.length);
-        // // http.setRequestHeader("Connection", "close");
+        //Send the proper header information along with the request
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        // http.setRequestHeader("Content-length", params.length);
+        // http.setRequestHeader("Connection", "close");
 
-        // http.onreadystatechange = function() { //Call a function when the state changes.
-        //   if (http.readyState == 4 && http.status == 200) {
-        //     // alert(http.responseText);
-        //   }
-        // }
-        // http.send(params);
-        // count = count + 1;
+        http.onreadystatechange = function() { //Call a function when the state changes.
+          if (http.readyState == 4 && http.status == 200) {
+            alert(http.responseText);
+          }
+        }
+        http.send(params);
+        count = count + 1;
+        alert('posting results');
       }
       //End Post
       // $submit = $('#emc-submit');
