@@ -18,8 +18,6 @@
   app.controller('IitCtrl', ['$scope', '$http', '$sce','$location','$route', function($scope, $http, $sce,$location,$route,$routeProvider) {
 
 // See if logged into fb .If not, redirect to FB Login Page
-
-
 if(typeof(Storage) !== "undefined") {
   var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
   console.log(isLoggedIn);
@@ -33,18 +31,20 @@ else {
   alert("Use an updated version of the browser to proceed");
 }
 
-if(typeof(Storage) !== "undefined") {
-  var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
-  console.log(isLoggedIn);
+$.ajax({
+  async: false,
+  type: 'GET',
+  url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
+  success: function(data) {
+          //callback
+          console.log("Current state is " + data.state);
 
-  if(isLoggedIn === null){
-    $location.path('/');
-    $route.reload();
-  }
-}
-else {
-  alert("Use an updated version of the browser to proceed");
-}
+          if(data.state != 6){
+            $location.path('/'+ 'tologinpage');
+            $route.reload();
+          }
+        }
+      });
 
 $scope.finalScore =[];
 
@@ -82,7 +82,7 @@ alert("Please note that each question can be viewed and anwered only once. Click
     // checkCookie();
 
     $scope.finalBackEndMappingArray = [41, 37, 31, 35, 36, 42, 43, 32, 37, 38, 40, 29, 9, 9, 15, 14, 10, 16, 11, 19, 19, 17, 20, 20, 21, 21, 23, 22, 22, 26, 24,
-    25, 47, 48, 46, 51, 53, 54, 58, 59, 60, 65, 67, 63, 56, 57, 60, 62, 66, 68, 69, 70, 72, 71, 55, 68,78,79,80,81,82,83,84,84,86,87,88,89,90
+    25, 47, 48, 46, 51, 53, 54, 58, 59, 60, 65, 67, 63, 56, 57, 60, 62, 66, 68, 69, 70, 72, 71, 55, 68, 78 ,79,80,81,82,83,84,85,86,87,88,89,90
     ];
 
     $scope.finalArrayIndex = [94, 88, 31, 92, 175, 98, 57, 29, 35, 96, 65,
@@ -343,22 +343,17 @@ alert("Please note that each question can be viewed and anwered only once. Click
             min = 0;
             $scope.activeQuestion = $scope.totalQuestions;
 
-          // alert(""+   $scope.activeQuestion+ ""+ $scope.totalQuestions);
-        } else {
-          angle += inc;
-          $scope.counter++;
-          sec--;
+          } else {
+            angle += inc;
+            $scope.counter++;
+            sec--;
+          }
         }
-      }
 
-      // console.log("" + $scope.counter +  "  " + $scope.counToTime);
-      //       if ($scope.counter >= $scope.counToTime){
-      //         $scope.show = false;
-      //         alert("asdasdasd");
-      // }
-      setInterval(drawScreen, 1000);
 
-    });
+        setInterval(drawScreen, 1000);
+
+      });
 
     //Loading Maths List Items
     $http.get('cat-math.json').then(function(mathData) {
@@ -533,7 +528,6 @@ alert("Please note that each question can be viewed and anwered only once. Click
     
 
     $scope.redirect= function(){
-      // window.location =  "http://now.hashlearn.com/users/dashboard/";
       $location.path('/'+ 'toexamdashboard');
       $route.reload();
     }
@@ -605,8 +599,8 @@ alert("Please note that each question can be viewed and anwered only once. Click
       var http = new XMLHttpRequest();
       var url = "http://staging-now.hashlearn.com/api/users/tutor/topic-test-result/";
       // var params = "lorem=ipsum&name=binny";
-      var params = "email=" + sessionStorage.getItem('email') + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId;
-      console.log("email=" + sessionStorage.getItem('email') + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId);
+      var params = "email=" + sessionStorage.getItem('email') + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId+ "&exam_id="+sessionStorage.getItem("examId");
+      // console.log("email=" + sessionStorage.getItem('email') + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId catId+ "&exam_id="+sessionStorage.getItem("examId"));
 
       http.open("POST", url, true);
 
@@ -634,6 +628,8 @@ alert("Please note that each question can be viewed and anwered only once. Click
       $scope.y = 0;
 
       if ($scope.activeQuestion == $scope.totalQuestions) {
+
+
         $('#progress').hide();
         for(var i = 0 ; i < $scope.totalQuestions/3; i ++ ) {
           $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[i])],Number($scope.answersArray[$scope.y++]  + $scope.answersArray[$scope.y++] + $scope.answersArray[$scope.y++]));
@@ -643,7 +639,7 @@ alert("Please note that each question can be viewed and anwered only once. Click
 
 
       // if ($scope.activeQuestion == $scope.totalQuestions) {
-      //   $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[0])], 0 + $scope.answersArray[0] + $scope.answersArray[1] + $scope.answersArray[2]);
+      //   $scope.uploadResultsToServer(catId, scoreScored)ToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[0])], 0 + $scope.answersArray[0] + $scope.answersArray[1] + $scope.answersArray[2]);
       //   $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[1])], 0 + $scope.answersArray[3] + $scope.answersArray[4] + $scope.answersArray[5]);
       //   $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[2])], 0 + $scope.answersArray[6] + $scope.answersArray[7] + $scope.answersArray[8]);
       //   $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[3])], 0 + $scope.answersArray[9] + $scope.answersArray[10] + $scope.answersArray[11]);

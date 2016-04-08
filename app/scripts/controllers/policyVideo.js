@@ -45,9 +45,7 @@ $.ajax({
 
 var $button = document.querySelector('#taketest');
 $button.addEventListener('click', function() {
-	alert('aSome');
- 		// window.location="http://localhost:8000/#/examdashboard";
- 		$location.path('/'+ 'examdashboard');
- 		$route.reload();
- 	});
+	$location.path('/'+ 'policytest');
+	$route.reload();
+});
 });

@@ -373,8 +373,8 @@ $("#submit").click(function(){
             }
             http.send(params);
 
-		// $location.path('/'+ 'policy');
-		// $route.reload();
+		$location.path('/'+ 'policy');
+		$route.reload();
 	}
 
 

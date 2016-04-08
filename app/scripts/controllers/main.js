@@ -70,9 +70,8 @@
                                 break;
 
                                 case 3:
-                                    $location.path('/'+ 'communcation');
+                                    $location.path('/'+ 'communicationtest');
                                     $route.reload();
-
                                     break;       
 
                                     case 4:

@@ -448,8 +448,8 @@ Quiz.prototype.render = function(container) {
       var http = new XMLHttpRequest();
       var url = "http://staging-now.hashlearn.com/api/users/tutor/topic-test-result/";
       // var params = "lorem=ipsum&name=binny";
-      var params = "email=" + sessionStorage.getItem('email') + "&questions_attempted=10&questions_correct=" + scoreScored + "&chapter_id=" + catId;
-      console.log("email=" + sessionStorage.getItem('email') + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId);
+      var params = "email=" + sessionStorage.getItem('email') + "&questions_attempted=10&questions_correct=" + scoreScored + "&chapter_id=" + catId+ "&exam_id="+sessionStorage.getItem("examId");
+      console.log("email=" + sessionStorage.getItem('email') + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId + "&exam_id="+sessionStorage.getItem("examId"));
 
       http.open("POST", url, true);
 
@@ -595,7 +595,9 @@ $(document).ready(function() {
   console.log(all_questions);
 
   $('#proceed').click(function(){
-    alert("aSome");
+    // alert("aSome");
+    $location.path('/'+ 'toexamdashboard');
+    $route.reload();
   });
 
 

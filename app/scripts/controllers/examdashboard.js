@@ -27,11 +27,12 @@
 
  	$scope.listOfExams = [];
 
-  $.ajax({
-    async: false,
-    type: 'GET',
-    url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
-    success: function(data) {
+//Getting state
+$.ajax({
+  async: false,
+  type: 'GET',
+  url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
+  success: function(data) {
           //callback
           console.log("Current state is " + data.state);
 
@@ -42,11 +43,13 @@
         }
       });
 
-  $.ajax({
-   async: false,
-   type: 'GET',
-   url: "http://staging-now.hashlearn.com/api/users/tutor/get-exams/?email="+sessionStorage.getItem("email"),
-   success: function(data) {
+
+//Getting list of EXAMS
+$.ajax({
+ async: false,
+ type: 'GET',
+ url: "http://staging-now.hashlearn.com/api/users/tutor/get-exams/?email="+sessionStorage.getItem("email"),
+ success: function(data) {
           //callback
           var jsonString = JSON.stringify(data);
           console.log(jsonString);
@@ -56,7 +59,7 @@
 
           for (var i=0; i < obj.length; i++){
           	$scope.listOfExams[obj[i].name] = obj[i].id;
-          	$("#exams").append("<input id='r" + i + "'type='radio' name='exam' value='" + obj[i].name +"'><label for='r" + i + "'><i></i>" + obj[i].name + "</label>");
+          	$("#exams").append("<input id='r" + i + "'type='radio' name='exam' value='" + obj[i].id +"'><label for='r" + i + "'><i></i>" + obj[i].name + "</label>");
           }
         }
       });
@@ -73,12 +76,23 @@
  	var $button = document.querySelector('#taketest');
  	$button.addEventListener('click', function() {
 
- 		if ($('input[name=exam]:checked', '#exams').val() !=null){
+    alert($('input[name=exam]:checked', '#exams').val());
 
- 		}
- 		else{
- 			alert("Select an exam to proceed");
- 		}
+    if ($('input[name=exam]:checked', '#exams').val() !=null){
+      if($('input[name=exam]:checked', '#exams').val() == "1" ){
+        sessionStorage.setItem("examId","1");
+        $location.path('/'+ 'lowergradelanding');
+        $route.reload();
+      }
+      if($('input[name=exam]:checked', '#exams').val() == "2"){
+        sessionStorage.setItem("examId","2");
+        $location.path('/'+ 'iittest');
+        $route.reload();
+      }
+    }
+    else{
+      alert("Select an exam to proceed");
+    }
  		// window.location="http://localhost:8000/#/examdashboard";
  		// $location.path('/'+ 'examdashboard');
  		// $route.reload();
