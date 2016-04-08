@@ -27,11 +27,26 @@
 
  	$scope.listOfExams = [];
 
- 	$.ajax({
- 		async: false,
- 		type: 'GET',
- 		url: "http://staging-now.hashlearn.com/api/users/tutor/get-exams/?email="+sessionStorage.getItem("email"),
- 		success: function(data) {
+  $.ajax({
+    async: false,
+    type: 'GET',
+    url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
+    success: function(data) {
+          //callback
+          console.log("Current state is " + data.state);
+
+          if(data.state !=6){
+            $location.path('/'+ 'tologinpage');
+            $route.reload();
+          }
+        }
+      });
+
+  $.ajax({
+   async: false,
+   type: 'GET',
+   url: "http://staging-now.hashlearn.com/api/users/tutor/get-exams/?email="+sessionStorage.getItem("email"),
+   success: function(data) {
           //callback
           var jsonString = JSON.stringify(data);
           console.log(jsonString);
