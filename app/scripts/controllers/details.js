@@ -285,7 +285,7 @@ $("#submit").click(function(){
 
 	//Getting string form exams
 	for(var i = 0 ; i < selectedLangs.length ; i++){
-		selectedLangsIds[i] = $scope.listOfLanguages[selectedExams[i]];
+		selectedLangsIds[i] = $scope.listOfLanguages[selectedLangs[i]];
 	}
 	var selectedLangsIdsString = selectedLangsIds.join(',');
 
@@ -368,14 +368,66 @@ $("#submit").click(function(){
 
             http.onreadystatechange = function() {//Call a function when the state changes.
             	if(http.readyState == 4 && http.status == 200) {
-            		alert(http.responseText);
+            		// alert(http.responseText);
             	}
             }
             http.send(params);
 
-		$location.path('/'+ 'policy');
-		$route.reload();
-	}
+
+		//Form Upload
+		var id_front_student = $('#id_front_student')[0].files[0];
+		var id_back_student = $('#id_back_student')[0].files[0];
+
+
+		var fd = new FormData();
+		fd.append("image_front", id_front_student);
+		fd.append("image_back",id_back_student);
+		fd.append("primary_email",sessionStorage.getItem("email"));
+		fd.append("email",$("#email").val());
+		fd.append("graduation_year",selectedGraduationYear);
+		fd.append("phone_number",$("#phone").val());
+		fd.append("list_of_languages",selectedLangsIdsString);
+
+
+		if($('#customDegreeText').val()=='')
+			fd.append("degree_id",selectedDegree);
+		else{
+			fd.append("degree_name",$('#customDegreeText').val());
+			alert('custom degree');
+		}
+
+		if($('#customCollegeText').val()=='')
+			fd.append("college_id",selectedCollege);
+		else{
+			fd.append("college_name",$('#customCollegeText').val());
+			alert('custom college');
+		}
+
+
+
+
+		$.ajax({
+			url: "http://staging-now.hashlearn.com/api/users/tutor/update-profile/",
+			type: "POST",
+			data: fd,
+			processData: false,
+			contentType: false,
+			success: function(response) {
+           // .. do something
+           alert('success');
+       },
+       error: function(jqXHR, textStatus, errorMessage) {
+           console.log(errorMessage); // Optional
+           alert('fail');
+       }
+   });
+        //End of Form Upload    
+
+
+
+        $location.path('/'+ 'policy');
+        $route.reload();
+    }
 
 
 
@@ -396,7 +448,7 @@ $scope.postExams= function ($scope,selectedExamIdsString) {
 
 	http.onreadystatechange = function() {//Call a function when the state changes.
 		if(http.readyState == 4 && http.status == 200) {
-			alert(http.responseText);
+			// alert(http.responseText);
 		}
 	}
 	http.send(params);	
