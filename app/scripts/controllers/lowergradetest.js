@@ -417,12 +417,17 @@ Quiz.prototype.render = function(container) {
 
     if (sessionStorage.getItem("mat") === "true") {
       consolidated_results = consolidated_results + mat_score_string + "Mathematics : <b>" + mat_score + "/10 </b>" + "<br/>";
+      $scope.uploadResultsToServer("77",mat_score);
+
     }
     if (sessionStorage.getItem("phy") === "true") {
       consolidated_results = consolidated_results + che_score_string + "Physics : <b>" + phy_score + "/10 </b>" + "<br/>";
+      $scope.uploadResultsToServer("75",phy_score);
+
     }
     if (sessionStorage.getItem("che") === "true") {
       consolidated_results = consolidated_results + che_score_string + "Chemistry : <b>" + che_score + "/10 </b>" + "<br/>";
+      $scope.uploadResultsToServer("76",che_score);
     }
     $('#quiz-results-score').html(consolidated_results);
     $('#canvas').hide();
@@ -431,12 +436,41 @@ Quiz.prototype.render = function(container) {
     // $('#quiz-results-score').html('You got <b>' + score + '/' + self.questions.length + '</b> questions correct.');
     $('#quiz-results').slideDown();
     $('#quiz button').slideUp();
+
+    //POST TO SERVER
+
+    //End of POST to Server
+
   }
 
+  $scope.uploadResultsToServer = function(catId, scoreScored) {
+      //Post
+      var http = new XMLHttpRequest();
+      var url = "http://staging-now.hashlearn.com/api/users/tutor/topic-test-result/";
+      // var params = "lorem=ipsum&name=binny";
+      var params = "email=" + sessionStorage.getItem('email') + "&questions_attempted=10&questions_correct=" + scoreScored + "&chapter_id=" + catId;
+      console.log("email=" + sessionStorage.getItem('email') + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId);
 
-  $('#submit-button').click(function(e) {
-    submitButtonFunction();
-  });
+      http.open("POST", url, true);
+
+      //Send the proper header information along with the request
+      http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      // http.setRequestHeader("Content-length", params.length);
+      // http.setRequestHeader("Connection", "close");
+
+      http.onreadystatechange = function() { //Call a function when the state changes.
+        if (http.readyState == 4 && http.status == 200) {
+          console.log(http.responseText);
+        }
+      }
+      http.send(params);
+      //End Post
+    }
+
+
+    $('#submit-button').click(function(e) {
+      submitButtonFunction();
+    });
 
   // Add a listener on the questions container to listen for user select changes. This is for determining whether we can submit answers or not.
   question_container.bind('user-select-change', function() {

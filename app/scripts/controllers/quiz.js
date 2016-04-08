@@ -82,7 +82,7 @@ alert("Please note that each question can be viewed and anwered only once. Click
     // checkCookie();
 
     $scope.finalBackEndMappingArray = [41, 37, 31, 35, 36, 42, 43, 32, 37, 38, 40, 29, 9, 9, 15, 14, 10, 16, 11, 19, 19, 17, 20, 20, 21, 21, 23, 22, 22, 26, 24,
-    25, 47, 48, 46, 51, 53, 54, 58, 59, 60, 65, 67, 63, 56, 57, 60, 62, 66, 68, 69, 70, 72, 71, 55, 68
+    25, 47, 48, 46, 51, 53, 54, 58, 59, 60, 65, 67, 63, 56, 57, 60, 62, 66, 68, 69, 70, 72, 71, 55, 68,78,79,80,81,82,83,84,84,86,87,88,89,90
     ];
 
     $scope.finalArrayIndex = [94, 88, 31, 92, 175, 98, 57, 29, 35, 96, 65,
@@ -129,7 +129,7 @@ alert("Please note that each question can be viewed and anwered only once. Click
     147,
     149,
     130,
-    270,150,151,152,153,154,155,156,157,158,159,220,221,221
+    270,150,151,152,153,154,155,156,157,158,159,220,221,222
     ]
 
     $scope.finalArray = ["Limit, Continuity and Differentiability", "Sets, Relations and Functions", "Complex Numbers",
@@ -605,8 +605,8 @@ alert("Please note that each question can be viewed and anwered only once. Click
       var http = new XMLHttpRequest();
       var url = "http://staging-now.hashlearn.com/api/users/tutor/topic-test-result/";
       // var params = "lorem=ipsum&name=binny";
-      var params = "email=" + username + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId;
-      // console.log("Parameters are  - username=" + username + "&questions_attempted=15&questions_correct=" + scoreScored + "&test_type=policy");
+      var params = "email=" + sessionStorage.getItem('email') + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId;
+      console.log("email=" + sessionStorage.getItem('email') + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId);
 
       http.open("POST", url, true);
 
@@ -631,11 +631,12 @@ alert("Please note that each question can be viewed and anwered only once. Click
       $scope.activeQuestion += 1;
 
       $scope.x = 0;
+      $scope.y = 0;
 
       if ($scope.activeQuestion == $scope.totalQuestions) {
         $('#progress').hide();
         for(var i = 0 ; i < $scope.totalQuestions/3; i ++ ) {
-          $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[i])], i + $scope.answersArray[$scope.k*i] + $scope.answersArray[($scope.k*i)+1] + $scope.answersArray[($scope.k*i)+2]);
+          $scope.uploadResultsToServer($scope.finalBackEndMappingArray[$scope.finalArrayIndex.indexOf($scope.selected[i])],Number($scope.answersArray[$scope.y++]  + $scope.answersArray[$scope.y++] + $scope.answersArray[$scope.y++]));
           $( "#result" ).append( "<p>"+  $scope.finalArray[$scope.finalArrayIndex.indexOf($scope.selected[i])] + "-" +  Number($scope.answersArray[$scope.x++]  + $scope.answersArray[$scope.x++] + $scope.answersArray[$scope.x++]) + "/3"+"<br /></p>" );
         }
       }
