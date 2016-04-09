@@ -40,8 +40,8 @@ $.ajax({
           console.log("Current state is " + data.state);
 
           if(data.state != 6){
-            $location.path('/'+ 'tologinpage');
-            $route.reload();
+            // $location.path('/'+ 'tologinpage');
+            // $route.reload();
           }
         }
       });
@@ -82,7 +82,7 @@ alert("Please note that each question can be viewed and anwered only once. Click
     // checkCookie();
 
     $scope.finalBackEndMappingArray = [41, 37, 31, 35, 36, 42, 43, 32, 37, 38, 40, 29, 9, 9, 15, 14, 10, 16, 11, 19, 19, 17, 20, 20, 21, 21, 23, 22, 22, 26, 24,
-    25, 47, 48, 46, 51, 53, 54, 58, 59, 60, 65, 67, 63, 56, 57, 60, 62, 66, 68, 69, 70, 72, 71, 55, 68, 78 ,79,80,81,82,83,84,85,86,87,88,89,90
+    25, 47, 48, 46, 51, 53, 54, 58, 59, 60, 65, 67, 63,49,49, 52, 54, 56,57,60,62,66, 68, 69, 70, 72, 71, 55, 68, 78 ,79,80,81,82,83,84,85,86,87,88,89,90
     ];
 
     $scope.finalArrayIndex = [94, 88, 31, 92, 175, 98, 57, 29, 35, 96, 65,
@@ -160,7 +160,8 @@ alert("Please note that each question can be viewed and anwered only once. Click
     "Wave Optics",
     "Dual Nature of Matter and Radiation",
     "Atoms",
-    "Semiconductor Materials and Electronic Devices", "Some Basic concepts in Chemistry",
+    "Semiconductor Materials and Electronic Devices",
+    "Some Basic concepts in Chemistry",
     "Atomic Structure",
     "Classification of Elements and Periodicity in Properties",
     "Chemical Thermodynamics",
@@ -203,6 +204,10 @@ alert("Please note that each question can be viewed and anwered only once. Click
     "Microbes in Humal Welfare"
     ];
 
+    alert('msg');
+    for(var i = 0 ; i < $scope.finalBackEndMappingArray.length;i++){
+      console.log("Topic - " + $scope.finalArray[i] + " - Final Array Index-" + $scope.finalArrayIndex[i] + " - Final backend mapping Array - "+ $scope.finalBackEndMappingArray[i]);
+    }
 
     $scope.selected = [];
     $scope.answersArray = [];

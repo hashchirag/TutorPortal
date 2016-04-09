@@ -30,28 +30,28 @@
  	}
 
 
- 	//Get the state of the user, if not 1, Redirect to FB Login Page.
- 	// $.ajax({
- 	// 	async: false,
- 	// 	type: 'GET',
- 	// 	url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
- 	// 	success: function(data) {
-  //         //callback
-  //         console.log("Current state is " + data.state);
+ 	// Get the state of the user, if not 1, Redirect to FB Login Page.
+ 	$.ajax({
+ 		async: false,
+ 		type: 'GET',
+ 		url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
+ 		success: function(data) {
+          //callback
+          console.log("Current state is " + data.state);
 
-  //         if(data.state !=1){
-  //         	$location.path('/'+ 'tologinpage');
-  //         	$route.reload();
-  //         }
-  //     }
-  // });
+          if(data.state !=1){
+          	$location.path('/'+ 'tologinpage');
+          	$route.reload();
+          }
+      }
+  });
 
 
 
-  $scope.listOfColleges = [];
-  $scope.listOfDegrees = [];
-  $scope.listOfExams = [];
-  $scope.listOfLanguages =[];
+ 	$scope.listOfColleges = [];
+ 	$scope.listOfDegrees = [];
+ 	$scope.listOfExams = [];
+ 	$scope.listOfLanguages =[];
 
 
 	//HIDE
