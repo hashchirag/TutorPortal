@@ -355,9 +355,9 @@ $("#submit").click(function(){
 		}
 
 		if( $('#graduate').is(':checked') ){
-			var id_front_student = $('#id_graduate').val(); 
-			var id_back_student = $('#certificate_graduate').val(); 
-			if( !(id_front_student =='' && id_back_student =='') ) 
+			var id_graduate = $('#id_graduate').val(); 
+			var certificate_graduate = $('#certificate_graduate').val(); 
+			if( !(id_graduate =='' && certificate_graduate =='') ) 
 			{ 
 				alert("Please upload your latest graduation certificate and an ID proof"); 
 				canSubmit = false;

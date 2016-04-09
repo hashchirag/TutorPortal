@@ -18,7 +18,7 @@
 
 if(typeof(Storage) !== "undefined") {
   var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
 
   if(isLoggedIn === null){
     $location.path('/'+ 'tologinpage');
@@ -35,7 +35,7 @@ $.ajax({
   url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
   success: function(data) {
           //callback
-          console.log("Current state is " + data.state);
+          // console.log("Current state is " + data.state);
 
           if(data.state !=3){
             $location.path('/'+ 'tologinpage');
@@ -240,7 +240,7 @@ emcInit();
 
           http.onreadystatechange = function() {//Call a function when the state changes.
             if(http.readyState == 4 && http.status == 200) {
-              alert(http.responseText);
+              // alert(http.responseText);
             }
           }
           http.send(params); 
@@ -264,7 +264,7 @@ emcInit();
 
           http.onreadystatechange = function() {//Call a function when the state changes.
             if(http.readyState == 4 && http.status == 200) {
-              alert(http.responseText);
+              // alert(http.responseText);
             }
           }
           http.send(params); 
@@ -286,7 +286,7 @@ emcInit();
           var url = "http://staging-now.hashlearn.com/api/users/tutor/test-result/";
           var correct = (itemCount - wrong.length);
           var params = "email=" + sessionStorage.getItem("email") + "&questions_attempted=15&questions_correct=" + correct + "&test_type=communication";
-          console.log("Parameters are - username=" + sessionStorage.getItem("email") + "&questions_attempted=15&questions_correct=" + correct + "&test_type=communication");
+          // console.log("Parameters are - username=" + sessionStorage.getItem("email") + "&questions_attempted=15&questions_correct=" + correct + "&test_type=communication");
 
           http.open("POST", url, true);
 
@@ -297,7 +297,7 @@ emcInit();
 
         http.onreadystatechange = function() { //Call a function when the state changes.
           if (http.readyState == 4 && http.status == 200) {
-            alert(http.responseText);
+            // alert(http.responseText);
           }
         }
         http.send(params);

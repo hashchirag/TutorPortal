@@ -110,7 +110,7 @@
  				// console.log('Welcome!  Fetching your information.... ');
  				$scope.sendData($scope,response.authResponse.accessToken);
 
- 				// console.log(response.authResponse);	
+ 				console.log(response.authResponse);	
  				FB.api('/me', function(response) {
  					// console.log('Good to see you, ' + response.name + '.');
 
