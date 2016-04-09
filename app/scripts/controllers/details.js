@@ -40,8 +40,8 @@
           console.log("Current state is " + data.state);
 
           if(data.state !=1){
-          	$location.path('/'+ 'tologinpage');
-          	$route.reload();
+          	// $location.path('/'+ 'tologinpage');
+          	// $route.reload();
           }
       }
   });
@@ -298,8 +298,8 @@ $("#submit").click(function(){
 	var alternative_college_name  = $('#customCollegeText').val();
 	var alternative_degree_name  = $('#customDegreeText').val();
 
-	console.log(alternative_college_name);
-	console.log(alternative_degree_name);
+	// console.log(alternative_college_name);
+	// console.log(alternative_degree_name);
 
 
 
@@ -335,25 +335,60 @@ $("#submit").click(function(){
 		alert('Please select your Graduation Year');
 	}
 
+	//Case of no radio button selected
+	if ( ! $('[name="studentOrGraduate"]').is(':checked')){
+		alert('Choose if you are a student or graduate');
+		canSubmit = false;
+	}
+	//Case of one selected
+	else{
+		//Case of student selected
+		if( $('#student').is(':checked') ){
+			var id_front_student = $('#id_front_student').val(); 
+			var id_back_student = $('#id_back_student').val(); 
+			if( !(id_front_student !='' && id_back_student !='') ) 
+			{ 
+				alert("Please upload Front and Back Images of your ID Card"); 
+				canSubmit = false;
+			} 
+
+		}
+
+		if( $('#graduate').is(':checked') ){
+			var id_front_student = $('#id_graduate').val(); 
+			var id_back_student = $('#certificate_graduate').val(); 
+			if( !(id_front_student =='' && id_back_student =='') ) 
+			{ 
+				alert("Please upload your latest graduation certificate and an ID proof"); 
+				canSubmit = false;
+			} 
+
+		}
+
+	}
+
+
+
+
 	//SUBMITTING THE FORM
 
 
-	canSubmit = true;
+	// canSubmit = false;
 	if(canSubmit){
 		// alert("SUBMITTED");
 		alert(selectedExamIdsString);
 		$scope.postExams($scope,selectedExamIdsString);
 
-		console.log("Email is " + $('#email').val() );
-		console.log("Phone number is " + $('#phone').val() );
+		// console.log("Email is " + $('#email').val() );
+		// console.log("Phone number is " + $('#phone').val() );
 
-		console.log("selected college is " + selectedCollege);
-		console.log("selected degree is " + selectedDegree);
-		console.log("selected graduation year is " + selectedGraduationYear);
+		// console.log("selected college is " + selectedCollege);
+		// console.log("selected degree is " + selectedDegree);
+		// console.log("selected graduation year is " + selectedGraduationYear);
 
-		console.log("selected exam ids string is"+selectedExamIdsString);
+		// console.log("selected exam ids string is"+selectedExamIdsString);
 
-		console.log("selected lang ids string is"+selectedLangsIdsString);
+		// console.log("selected lang ids string is"+selectedLangsIdsString);
 
 
 
@@ -383,7 +418,7 @@ $("#submit").click(function(){
 		fd.append("image_front", id_front_student);
 		fd.append("image_back",id_back_student);
 		fd.append("primary_email",sessionStorage.getItem("email"));
-		fd.append("email",$("#email").val());
+		fd.append("email_id",$("#email").val());
 		fd.append("graduation_year",selectedGraduationYear);
 		fd.append("phone_number",$("#phone").val());
 		fd.append("list_of_languages",selectedLangsIdsString);
@@ -404,8 +439,6 @@ $("#submit").click(function(){
 		}
 
 
-
-
 		$.ajax({
 			url: "http://staging-now.hashlearn.com/api/users/tutor/update-profile/",
 			type: "POST",
@@ -413,20 +446,19 @@ $("#submit").click(function(){
 			processData: false,
 			contentType: false,
 			success: function(response) {
-           // .. do something
-           alert('success');
-       },
-       error: function(jqXHR, textStatus, errorMessage) {
+				$location.path('/'+ 'policy');
+				$route.reload();
+			},
+			error: function(jqXHR, textStatus, errorMessage) {
            console.log(errorMessage); // Optional
-           alert('fail');
+           alert('Retry again');
        }
    });
         //End of Form Upload    
 
 
 
-        $location.path('/'+ 'policy');
-        $route.reload();
+
     }
 
 
@@ -457,14 +489,14 @@ $scope.postExams= function ($scope,selectedExamIdsString) {
 }
 //END OF POST EXAM DATA
 
-$scope.getSelectedExamIds = function(selectedExams){
+// $scope.getSelectedExamIds = function(selectedExams){
 
-	var selectedExamIds =[];
-	for(var i =0 ; i < selectedExams.length;i++){
+// 	var selectedExamIds =[];
+// 	for(var i =0 ; i < selectedExams.length;i++){
 
-	}
+// 	}
 
-}
+// }
 
 
 $scope.checkNumberField = function(){
