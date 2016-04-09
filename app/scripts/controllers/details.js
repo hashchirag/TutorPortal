@@ -376,7 +376,7 @@ $("#submit").click(function(){
 	// canSubmit = false;
 	if(canSubmit){
 		// alert("SUBMITTED");
-		alert(selectedExamIdsString);
+		// alert(selectedExamIdsString);
 		$scope.postExams($scope,selectedExamIdsString);
 
 		// console.log("Email is " + $('#email').val() );
@@ -428,14 +428,14 @@ $("#submit").click(function(){
 			fd.append("degree_id",selectedDegree);
 		else{
 			fd.append("degree_name",$('#customDegreeText').val());
-			alert('custom degree');
+			// alert('custom degree');
 		}
 
 		if($('#customCollegeText').val()=='')
 			fd.append("college_id",selectedCollege);
 		else{
 			fd.append("college_name",$('#customCollegeText').val());
-			alert('custom college');
+			// alert('custom college');
 		}
 
 
@@ -451,7 +451,7 @@ $("#submit").click(function(){
 			},
 			error: function(jqXHR, textStatus, errorMessage) {
            console.log(errorMessage); // Optional
-           alert('Retry again');
+           alert('Retry again later');
        }
    });
         //End of Form Upload    

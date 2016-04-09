@@ -17,7 +17,7 @@
 
   if(typeof(Storage) !== "undefined") {
     var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
-    console.log(isLoggedIn);
+    // console.log(isLoggedIn);
 
     if(isLoggedIn === null){
       $location.path('/'+ 'tologinpage');
@@ -34,7 +34,7 @@
     url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
     success: function(data) {
           //callback
-          console.log("Current state is " + data.state);
+          // console.log("Current state is " + data.state);
 
           if(data.state !=2){
             $location.path('/'+ 'tologinpage');
@@ -231,7 +231,7 @@
     });
 
     score = ((itemCount - wrong.length) / itemCount).toFixed(2) * 100 + "%";
-    console.log(score);
+    // console.log(score);
 
       //More than 5 wrong - Case of failure
       if( wrong.length >= 5 ){
@@ -302,7 +302,7 @@
         var url = "http://staging-now.hashlearn.com/api/users/tutor/test-result/";
         var correct = (itemCount - wrong.length);
         var params = "email=" + sessionStorage.getItem("email") + "&questions_attempted=15&questions_correct=" + correct + "&test_type=policy";
-        console.log("Parameters are - username=" + sessionStorage.getItem("email") + "&questions_attempted=15&questions_correct=" + correct + "&test_type=policy");
+        // console.log("Parameters are - username=" + sessionStorage.getItem("email") + "&questions_attempted=15&questions_correct=" + correct + "&test_type=policy");
 
         http.open("POST", url, true);
 

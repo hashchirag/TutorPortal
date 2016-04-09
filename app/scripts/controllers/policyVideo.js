@@ -17,7 +17,7 @@
 
 if(typeof(Storage) !== "undefined") {
 	var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
-	console.log(isLoggedIn);
+	// console.log(isLoggedIn);
 
 	if(isLoggedIn === null){
 		$location.path('/'+ 'tologinpage');
@@ -34,7 +34,7 @@ $.ajax({
 	url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
 	success: function(data) {
           //callback
-          console.log("Current state is " + data.state);
+          // console.log("Current state is " + data.state);
 
           if(data.state !=2){
           	$location.path('/'+ 'tologinpage');

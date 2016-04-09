@@ -17,7 +17,7 @@
 
 if(typeof(Storage) !== "undefined") {
 	var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
-	console.log(isLoggedIn);
+	// console.log(isLoggedIn);
 
 	if(isLoggedIn === null){
 		$location.path('/'+ 'tologinpage');

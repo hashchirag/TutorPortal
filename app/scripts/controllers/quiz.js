@@ -20,7 +20,7 @@
 // See if logged into fb .If not, redirect to FB Login Page
 if(typeof(Storage) !== "undefined") {
   var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
 
   if(isLoggedIn === null){
     $location.path('/'+ 'tologinpage');
@@ -37,7 +37,7 @@ $.ajax({
   url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
   success: function(data) {
           //callback
-          console.log("Current state is " + data.state);
+          // console.log("Current state is " + data.state);
 
           if(data.state != 6){
             // $location.path('/'+ 'tologinpage');
@@ -48,191 +48,155 @@ $.ajax({
 
 $scope.finalScore =[];
 
-var username = "";
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') c = c.substring(1);
-    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-  }
-  return "";
-}
-
-function checkCookie() {
-  cookie = getCookie("values");
-
-
-  if (cookie != "") {
-    var res = cookie.split(",");
-    console.log("Welcome again " + res[0]);
-
-    console.log(res[0]);
-    console.log(res[1]);
-    username = res[0];
-  } else {
-    alert("Enable cookies and restart");
-  }
-}
-
 alert("Please note that each question can be viewed and anwered only once. Clicking on an answer selects and submits it automatically.");
 
-    // checkCookie();
+$scope.finalBackEndMappingArray = [41, 37, 31, 35, 36, 42, 43, 32, 37, 38, 40, 29, 9, 9, 15, 14, 10, 16, 11, 19, 19, 17, 20, 20, 21, 21, 23, 22, 22, 26, 24,
+25, 47, 48, 46, 51, 53, 54, 58, 59, 60, 65, 67, 63,49,49, 52, 54, 56,57,60,62,66, 68, 69, 70, 72, 71, 55, 68, 78 ,79,80,81,82,83,84,85,86,87,88,89,90
+];
 
-    $scope.finalBackEndMappingArray = [41, 37, 31, 35, 36, 42, 43, 32, 37, 38, 40, 29, 9, 9, 15, 14, 10, 16, 11, 19, 19, 17, 20, 20, 21, 21, 23, 22, 22, 26, 24,
-    25, 47, 48, 46, 51, 53, 54, 58, 59, 60, 65, 67, 63,49,49, 52, 54, 56,57,60,62,66, 68, 69, 70, 72, 71, 55, 68, 78 ,79,80,81,82,83,84,85,86,87,88,89,90
-    ];
+$scope.finalArrayIndex = [94, 88, 31, 92, 175, 98, 57, 29, 35, 96, 65,
+103, 261, 262, 106, 107, 108,
+263,
+110,
+112,
+266,
+114,
+251,
+252,
+253,
+254,
+117,
+255,
+256,
+119,
+257,
+160,
+122,
+124,
+132,
+126,
+128,
+272,
+134,
+135,
+136,
+142,
+141,
+139,
+123,
+267,
+127,
+269,
+131,
+133,
+268,
+138,
+143,
+144,
+145,
+146,
+147,
+149,
+130,
+270,150,151,152,153,154,155,156,157,158,159,220,221,222
+]
 
-    $scope.finalArrayIndex = [94, 88, 31, 92, 175, 98, 57, 29, 35, 96, 65,
-    103, 261, 262, 106, 107, 108,
-    263,
-    110,
-    112,
-    266,
-    114,
-    251,
-    252,
-    253,
-    254,
-    117,
-    255,
-    256,
-    119,
-    257,
-    160,
-    122,
-    124,
-    132,
-    126,
-    128,
-    272,
-    134,
-    135,
-    136,
-    142,
-    141,
-    139,
-    123,
-    267,
-    127,
-    269,
-    131,
-    133,
-    268,
-    138,
-    143,
-    144,
-    145,
-    146,
-    147,
-    149,
-    130,
-    270,150,151,152,153,154,155,156,157,158,159,220,221,222
-    ]
+$scope.finalArray = ["Limit, Continuity and Differentiability", "Sets, Relations and Functions", "Complex Numbers",
+"Bionomial Theorem and Simple Applications",
+"Sequences and Series",
+"3-D Geometry",
+"Inverse Trigonometric Functions",
+"Applications of Matrices and Determinants",
+"Integral Calculus and its applications",
+"Differential Equations",
+"Vector Algebra", "Units and Measurement",
+"Motion in a Straight Line",
+"Motion in a Plane",
+"Work, Power and Energy",
+"System of Particles and Rotational Motion",
+"Gravitation",
+"Mechanical Properties of Solids",
+"Thermodynamics",
+"Oscillations",
+"Waves",
+"Current Electricity",
+"Moving Charges and Magentism",
+"Magnetism and Matter",
+"Electromagnetic Induction",
+"Alternating Current",
+"Electromagnetic Waves",
+"Ray Optics and Optical Instruments",
+"Wave Optics",
+"Dual Nature of Matter and Radiation",
+"Atoms",
+"Semiconductor Materials and Electronic Devices",
+"Some Basic concepts in Chemistry",
+"Atomic Structure",
+"Classification of Elements and Periodicity in Properties",
+"Chemical Thermodynamics",
+"Equilibrium",
+"Redox Reactions",
+"Hydrogen",
+"s-Block Elements",
+"p-Block Elements",
+"Hydrocarbons",
+"Some Basic principles of Organic chemistry",
+"Environmental Chemistry",
+"States of Matter: Liquids and Gases",
+"States of Matter: Solid State",
+"Solutions",
+"Electrochemistry",
+"Surface Chemistry",
+"General Principals and Processes of Isolation of Metals",
+"p-Block elements (Group-15 to Group-18)",
+"Co-ordination Compounds",
+"Halogens",
+"Oxygen: Alchohols, Phenols and Ethers",
+"Nitrogen",
+"Polymers",
+"Biomolecules",
+"Practical Chemistry",
+"Chemical Kinetics",
+"Oxygen: Aldehydes, Ketones and Carboxylic Acids",
+"Diversity in Living World",
+"Structural Organisation in Animals and Plants",
+"Cell Structure and Formation",
+"Plant Physiology",
+"Human Physiology",
+"Reproduction",
+"Genetics and Evolution",
+"Biology in Human Welfare",
+"Biotechnology and its Applications",
+"Ecology and Environment",
+"Human Health and Disease",
+"Strategies for Enhancement in Food Production",
+"Microbes in Humal Welfare"
+];
 
-    $scope.finalArray = ["Limit, Continuity and Differentiability", "Sets, Relations and Functions", "Complex Numbers",
-    "Bionomial Theorem and Simple Applications",
-    "Sequences and Series",
-    "3-D Geometry",
-    "Inverse Trigonometric Functions",
-    "Applications of Matrices and Determinants",
-    "Integral Calculus and its applications",
-    "Differential Equations",
-    "Vector Algebra", "Units and Measurement",
-    "Motion in a Straight Line",
-    "Motion in a Plane",
-    "Work, Power and Energy",
-    "System of Particles and Rotational Motion",
-    "Gravitation",
-    "Mechanical Properties of Solids",
-    "Thermodynamics",
-    "Oscillations",
-    "Waves",
-    "Current Electricity",
-    "Moving Charges and Magentism",
-    "Magnetism and Matter",
-    "Electromagnetic Induction",
-    "Alternating Current",
-    "Electromagnetic Waves",
-    "Ray Optics and Optical Instruments",
-    "Wave Optics",
-    "Dual Nature of Matter and Radiation",
-    "Atoms",
-    "Semiconductor Materials and Electronic Devices",
-    "Some Basic concepts in Chemistry",
-    "Atomic Structure",
-    "Classification of Elements and Periodicity in Properties",
-    "Chemical Thermodynamics",
-    "Equilibrium",
-    "Redox Reactions",
-    "Hydrogen",
-    "s-Block Elements",
-    "p-Block Elements",
-    "Hydrocarbons",
-    "Some Basic principles of Organic chemistry",
-    "Environmental Chemistry",
-    "States of Matter: Liquids and Gases",
-    "States of Matter: Solid State",
-    "Solutions",
-    "Electrochemistry",
-    "Surface Chemistry",
-    "General Principals and Processes of Isolation of Metals",
-    "p-Block elements (Group-15 to Group-18)",
-    "Co-ordination Compounds",
-    "Halogens",
-    "Oxygen: Alchohols, Phenols and Ethers",
-    "Nitrogen",
-    "Polymers",
-    "Biomolecules",
-    "Practical Chemistry",
-    "Chemical Kinetics",
-    "Oxygen: Aldehydes, Ketones and Carboxylic Acids",
-    "Diversity in Living World",
-    "Structural Organisation in Animals and Plants",
-    "Cell Structure and Formation",
-    "Plant Physiology",
-    "Human Physiology",
-    "Reproduction",
-    "Genetics and Evolution",
-    "Biology in Human Welfare",
-    "Biotechnology and its Applications",
-    "Ecology and Environment",
-    "Human Health and Disease",
-    "Strategies for Enhancement in Food Production",
-    "Microbes in Humal Welfare"
-    ];
+$scope.selected = [];
+$scope.answersArray = [];
+$scope.totalQuestions ;
+$scope.ended = true;
 
-    alert('msg');
-    for(var i = 0 ; i < $scope.finalBackEndMappingArray.length;i++){
-      console.log("Topic - " + $scope.finalArray[i] + " - Final Array Index-" + $scope.finalArrayIndex[i] + " - Final backend mapping Array - "+ $scope.finalBackEndMappingArray[i]);
-    }
+$scope.selectedTopicsLength = 0;
 
-    $scope.selected = [];
-    $scope.answersArray = [];
-    $scope.totalQuestions ;
-    $scope.ended = true;
+$scope.drawCanvas = (function drawCanvas() {
+  var canvas = document.getElementById('mycanvas');
+  var ctx = canvas.getContext('2d');
+  var cWidth = canvas.width;
+  var cHeight = canvas.height;
 
-    $scope.selectedTopicsLength = 0;
+  $scope.countTo = $scope.selectedTopicsLength * 180 * 3;
+  $scope.counToTime = $scope.selectedTopicsLength * 180 * 3 ;
 
-    $scope.drawCanvas = (function drawCanvas() {
-      var canvas = document.getElementById('mycanvas');
-      var ctx = canvas.getContext('2d');
-      var cWidth = canvas.width;
-      var cHeight = canvas.height;
-
-      $scope.countTo = $scope.selectedTopicsLength * 180 * 3;
-      $scope.counToTime = $scope.selectedTopicsLength * 180 * 3 ;
-
-      var min = Math.floor($scope.countTo / 60);
-      var sec = $scope.countTo - (min * 60);
-      $scope.counter = 0;
-      var angle = 270;
-      var inc = 360 / $scope.countTo;
+  var min = Math.floor($scope.countTo / 60);
+  var sec = $scope.countTo - (min * 60);
+  $scope.counter = 0;
+  var angle = 270;
+  var inc = 360 / $scope.countTo;
 
 
-      function drawScreen() {
+  function drawScreen() {
 
 
 
@@ -517,7 +481,7 @@ alert("Please note that each question can be viewed and anwered only once. Click
     $scope.loadAndPopulate = function(categoryId, i) {
       $scope.url = "http://staging-now.hashlearn.com/v1/content/practice/tutor/categoryQuestions/?catid=";
       $scope.url = $scope.url + categoryId;
-      console.log("url is " + $scope.url);
+      // console.log("url is " + $scope.url);
 
 
       $http.get($scope.url).then(function(questionData) {
@@ -616,7 +580,7 @@ alert("Please note that each question can be viewed and anwered only once. Click
 
       http.onreadystatechange = function() { //Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
-          console.log(http.responseText);
+          // console.log(http.responseText);
         }
       }
       http.send(params);

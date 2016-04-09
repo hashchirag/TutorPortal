@@ -20,7 +20,7 @@
 
 if(typeof(Storage) !== "undefined") {
   var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
 
   if(isLoggedIn === null){
     $location.path('/'+ 'tologinpage');
@@ -30,6 +30,21 @@ if(typeof(Storage) !== "undefined") {
 else {
   alert("Use an updated version of the browser to proceed");
 }
+
+$.ajax({
+  async: false,
+  type: 'GET',
+  url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
+  success: function(data) {
+          //callback
+          // console.log("Current state is " + data.state);
+
+          if(data.state != 6){
+            $location.path('/'+ 'tologinpage');
+            $route.reload();
+          }
+        }
+      });
 
 var selected_subjects = [];
 
@@ -103,10 +118,10 @@ var flipCard = function() {
       }
 
 
-      console.log(selected_subjects);
-      console.log(sessionStorage.getItem('phy'));
-      console.log(sessionStorage.getItem('che'));
-      console.log(sessionStorage.getItem('mat'));
+      // console.log(selected_subjects);
+      // console.log(sessionStorage.getItem('phy'));
+      // console.log(sessionStorage.getItem('che'));
+      // console.log(sessionStorage.getItem('mat'));
 
       if (selected_atleast_one){
         // window.location = "lowergradetest.html";
@@ -127,7 +142,7 @@ var flipCard = function() {
      closeButtonClick: function(event) {
       var event = event || window.event;
       event.preventDefault();
-      alert('Handle close');
+      // alert('Handle close');
     },
 
     /**
