@@ -318,7 +318,7 @@
         }
         http.send(params);
         count = count + 1;
-        alert('posting results');
+        // alert('posting results');
       }
       //End Post
       // $submit = $('#emc-submit');

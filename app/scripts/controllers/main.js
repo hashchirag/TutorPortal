@@ -26,8 +26,8 @@
  		})
  		.then(function(response) {
             // success
-            console.log("State is " + response.data.state);
-            console.log("email id is " + response.data.email); 
+            // console.log("State is " + response.data.state);
+            // console.log("email id is " + response.data.email); 
 
             //Writing to session data
             if(typeof(Storage) !== "undefined") {
@@ -107,18 +107,19 @@
  	$scope.doLogin = function(){
  		FB.login(function(response) {
  			if (response.authResponse) {
- 				console.log('Welcome!  Fetching your information.... ');
+ 				// console.log('Welcome!  Fetching your information.... ');
  				$scope.sendData($scope,response.authResponse.accessToken);
 
- 				console.log(response.authResponse);	
+ 				// console.log(response.authResponse);	
  				FB.api('/me', function(response) {
- 					console.log('Good to see you, ' + response.name + '.');
+ 					// console.log('Good to see you, ' + response.name + '.');
 
  				});
  			} else {
  				console.log('User cancelled login or did not fully authorize.');
- 			}
- 		}, {scope: 'public_profile,email'});
+                alert('Failed Login In.');
+            }
+        }, {scope: 'public_profile,email'});
  	}
 
  	window.fbAsyncInit = function() {

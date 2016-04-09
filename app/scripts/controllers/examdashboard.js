@@ -14,7 +14,7 @@
 
  	if(typeof(Storage) !== "undefined") {
  		var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
- 		console.log(isLoggedIn);
+ 		// console.log(isLoggedIn);
 
  		if(isLoggedIn === null){
  			$location.path('/'+ 'tologinpage');
@@ -34,7 +34,7 @@ $.ajax({
   url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
   success: function(data) {
           //callback
-          console.log("Current state is " + data.state);
+          // console.log("Current state is " + data.state);
 
           if(data.state !=6){
             $location.path('/'+ 'tologinpage');
@@ -52,10 +52,10 @@ $.ajax({
  success: function(data) {
           //callback
           var jsonString = JSON.stringify(data);
-          console.log(jsonString);
+          // console.log(jsonString);
 
           var obj = JSON.parse(jsonString);
-          console.log(obj);
+          // console.log(obj);
 
           for (var i=0; i < obj.length; i++){
           	$scope.listOfExams[obj[i].name] = obj[i].id;
@@ -76,7 +76,7 @@ $.ajax({
  	var $button = document.querySelector('#taketest');
  	$button.addEventListener('click', function() {
 
-    alert($('input[name=exam]:checked', '#exams').val());
+    // alert($('input[name=exam]:checked', '#exams').val());
 
     if ($('input[name=exam]:checked', '#exams').val() !=null){
       if($('input[name=exam]:checked', '#exams').val() == "1" ){

@@ -40,8 +40,8 @@ $.ajax({
           // console.log("Current state is " + data.state);
 
           if(data.state != 6){
-            // $location.path('/'+ 'tologinpage');
-            // $route.reload();
+            $location.path('/'+ 'tologinpage');
+            $route.reload();
           }
         }
       });

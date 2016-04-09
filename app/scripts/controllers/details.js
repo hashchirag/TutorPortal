@@ -18,7 +18,7 @@
 
  	if(typeof(Storage) !== "undefined") {
  		var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
- 		console.log(isLoggedIn);
+ 		// console.log(isLoggedIn);
 
  		if(isLoggedIn === null){
  			$location.path('/'+ 'tologinpage');
@@ -37,11 +37,11 @@
  		url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
  		success: function(data) {
           //callback
-          console.log("Current state is " + data.state);
+          // console.log("Current state is " + data.state);
 
           if(data.state !=1){
-          	// $location.path('/'+ 'tologinpage');
-          	// $route.reload();
+          	$location.path('/'+ 'tologinpage');
+          	$route.reload();
           }
       }
   });

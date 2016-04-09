@@ -18,7 +18,7 @@
 
 if(typeof(Storage) !== "undefined") {
   var isLoggedIn = sessionStorage.getItem("loggedIntoFB");
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
 
   if(isLoggedIn === null){
     $location.path('/'+ 'tologinpage');
@@ -28,6 +28,21 @@ if(typeof(Storage) !== "undefined") {
 else {
   alert("Use an updated version of the browser to proceed");
 }
+
+$.ajax({
+  async: false,
+  type: 'GET',
+  url: "http://staging-now.hashlearn.com/api/users/tutor/get-status/?email="+sessionStorage.getItem("email"),
+  success: function(data) {
+          //callback
+          // console.log("Current state is " + data.state);
+
+          if(data.state != 6){
+            $location.path('/'+ 'tologinpage');
+            $route.reload();
+          }
+        }
+      });
 
 // Array of all the questions and choices to populate the questions. This might be saved in some JSON file or a database and we would have to read the data in.
 var all_questions = [];
@@ -386,13 +401,13 @@ Quiz.prototype.render = function(container) {
 
 
 
-    console.log("phy score is " + phy_score);
-    console.log("chem score is " + che_score);
-    console.log("mat score is " + mat_score);
+    // console.log("phy score is " + phy_score);
+    // console.log("chem score is " + che_score);
+    // console.log("mat score is " + mat_score);
 
     // Display the score with the appropriate message
     var percentage = score / self.questions.length;
-    console.log(percentage);
+    // console.log(percentage);
     var message;
     // if (percentage === 1) {
     //   message = 'Great job!'
@@ -449,7 +464,7 @@ Quiz.prototype.render = function(container) {
       var url = "http://staging-now.hashlearn.com/api/users/tutor/topic-test-result/";
       // var params = "lorem=ipsum&name=binny";
       var params = "email=" + sessionStorage.getItem('email') + "&questions_attempted=10&questions_correct=" + scoreScored + "&chapter_id=" + catId+ "&exam_id="+sessionStorage.getItem("examId");
-      console.log("email=" + sessionStorage.getItem('email') + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId + "&exam_id="+sessionStorage.getItem("examId"));
+      // console.log("email=" + sessionStorage.getItem('email') + "&questions_attempted=3&questions_correct=" + scoreScored + "&chapter_id=" + catId + "&exam_id="+sessionStorage.getItem("examId"));
 
       http.open("POST", url, true);
 
@@ -460,7 +475,7 @@ Quiz.prototype.render = function(container) {
 
       http.onreadystatechange = function() { //Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
-          console.log(http.responseText);
+          // console.log(http.responseText);
         }
       }
       http.send(params);
@@ -592,7 +607,7 @@ $(document).ready(function() {
   $('#preview').text('Question Number : ' + $scope.currentQuestionIndex + " / " + $scope.totalNumberOfQuestions);
 
 
-  console.log(all_questions);
+  // console.log(all_questions);
 
   $('#proceed').click(function(){
     // alert("aSome");
